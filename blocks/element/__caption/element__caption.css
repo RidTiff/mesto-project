@@ -1,0 +1,9 @@
+.element__caption {
+    display: flex;
+    color: #000;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin: 0;
+    padding: 24px 20px 0 20px;
+    font-size: 0;
+}

@@ -1,0 +1,21 @@
+.profInfo {
+    display: grid;
+    grid-template-columns: 294px 24px;
+    grid-template-areas: 
+    "name edit-button"
+    "description description";
+    gap: 16px 18px;
+    height: 86px;
+    width: 336px;
+    flex-shrink: 0;
+}
+
+@media screen and (max-width: 767px) {
+    .profInfo {
+        width: 282px;
+        height: 54px;
+        display: block;
+        position: relative;
+        margin-bottom: 35px;
+    }
+}
