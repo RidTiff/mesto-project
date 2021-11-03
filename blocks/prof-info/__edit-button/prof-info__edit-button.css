@@ -1,25 +1,24 @@
-.profInfo__edit-button {
+.prof-info__edit-button {
     width: 24px;
     height: 24px;
     border: 1px solid #fff;
     box-sizing: border-box;
-    background-image: url(../../../images/Vectorpen.png);
+    background-image: url(../../../images/Vectorpen.svg);
     background-repeat: no-repeat;
     background-position: center;
     background-color: black;
     grid-area: edit-button;
-    align-self: end;
-    position: relative;
-    bottom: 3px;
+    align-self: center;
     padding: 0;
+    cursor: pointer;
 }
 
-.profInfo__edit-button:hover {
+.prof-info__edit-button:hover {
     opacity: .6;
 }
 
 @media screen and (max-width: 767px) {
-    .profInfo__edit-button {
+    .prof-info__edit-button {
         bottom: 0;
         width: 18px;
         height: 18px;

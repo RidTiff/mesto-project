@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
-  <link rel="stylesheet" href="./page/index.css">
+  <link rel="stylesheet" href="./pages/index.css">
 </head>
 <body class="page">
   <header class="header">
@@ -14,18 +14,68 @@
   <main class="content">
     <section class="profile">
       <div class="profile__avatar"></div>
-      <div class="profInfo">
-        <h1 class="profInfo__name">Жак-Ив Кусто</h1>
-        <p class="profInfo__description">Исследователь океана</p>
-        <button class="profInfo__edit-button" type="button"></button>
+      <div class="prof-info">
+        <h1 class="prof-info__name">Жак-Ив Кусто</h1>
+        <p class="prof-info__description">Исследователь океана</p>
+        <button class="prof-info__edit-button" type="button"></button>
       </div>
-      <button class="add-button" type="button"></button>
+      <button class="prof-info__add-button" type="button"></button>
     </section>
-    <section class="popup popup_opened">
+    <section class="elements">
+      <article class="element">
+        <img src="./images/kirill-pershin-1088404-unsplashCher.png"
+         alt="Церковь в Карачаевске" class="element__image">
+        <div class="element__caption">
+          <h3 class="element__name">Карачаевск</h3>
+          <button class="element__like" type="button"></button>
+        </div>
+      </article>
+      <article class="element">
+        <img src="./images/kirill-pershin-1404681-unsplashElbrus.png"
+         alt="Эльбрус" class="element__image">
+        <div class="element__caption">
+          <h3 class="element__name">Гора Эльбрус</h3>
+          <button class="element__like" type="button"></button>
+        </div>
+      </article>
+      <article class="element">
+        <img src="./images/kirill-pershin-1556355-unsplashDombay.png"
+         alt="Домбай" class="element__image">
+        <div class="element__caption">
+          <h3 class="element__name">Домбай</h3>
+          <button class="element__like" type="button"></button>
+        </div>
+      </article>
+      <article class="element">
+        <img src="./images/kirill-pershin-1404681-unsplashElbrus.png"
+         alt="Гора Эльбрус" class="element__image">
+        <div class="element__caption">
+          <h3 class="element__name">Гора Эльбрус</h3>
+          <button class="element__like" type="button"></button>
+        </div>
+      </article>
+      <article class="element">
+        <img src="./images/kirill-pershin-1556355-unsplashDombay.png"
+         alt="Домбай" class="element__image">
+        <div class="element__caption">
+          <h3 class="element__name">Домбай</h3>
+          <button class="element__like" type="button"></button>
+        </div>
+      </article>
+      <article class="element">
+        <img src="./images/kirill-pershin-1088404-unsplashCher.png"
+         alt="Церковь в Карачаевске" class="element__image">
+        <div class="element__caption">
+          <h3 class="element__name">Карачаево-Черкесск</h3>
+          <button class="element__like" type="button"></button>
+        </div>
+      </article>
+    </section>
+    <div class="popup">
       <div class="popup__container">
-        <button class="popup__close"></button>
+        <button class="popup__close" type="button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form action="" class="popup__form" method="post">
+        <form action="popup" class="popup__form" method="post" name="profile">
           <fieldset class="popup__input-container">
             <input type="text" value="Жак-Ив Кусто" name="name" class="popup__item popup__item_value_name popup__item_type_text">
             <input type="text" value="Исследователь океана" name="description" class="popup__item popup__item_value_description popup__item_type_text">
@@ -33,57 +83,7 @@
           <button class="popup__submit" type="submit">Сохранить</button>
         </form>
       </div>
-    </section>
-    <section class="elements">
-      <section class="element">
-        <img src="./images/kirill-pershin-1088404-unsplashCher.png"
-         alt="Церковь в Карачаевске" class="element__image">
-        <div class="element__caption">
-          <h2 class="element__name">Карачаевск</h2>
-          <button class="element__like" type="button"></button>
-        </div>
-      </section>
-      <section class="element">
-        <img src="./images/kirill-pershin-1404681-unsplashElbrus.png"
-         alt="Эльбрус" class="element__image">
-        <div class="element__caption">
-          <h2 class="element__name">Гора Эльбрус</h2>
-          <button class="element__like" type="button"></button>
-        </div>
-      </section>
-      <section class="element">
-        <img src="./images/kirill-pershin-1556355-unsplashDombay.png"
-         alt="Домбай" class="element__image">
-        <div class="element__caption">
-          <h2 class="element__name">Домбай</h2>
-          <button class="element__like" type="button"></button>
-        </div>
-      </section>
-      <section class="element">
-        <img src="./images/kirill-pershin-1404681-unsplashElbrus.png"
-         alt="Гора Эльбрус" class="element__image">
-        <div class="element__caption">
-          <h2 class="element__name">Гора Эльбрус</h2>
-          <button class="element__like" type="button"></button>
-        </div>
-      </section>
-      <section class="element">
-        <img src="./images/kirill-pershin-1556355-unsplashDombay.png"
-         alt="Домбай" class="element__image">
-        <div class="element__caption">
-          <h2 class="element__name">Домбай</h2>
-          <button class="element__like" type="button"></button>
-        </div>
-      </section>
-      <section class="element">
-        <img src="./images/kirill-pershin-1088404-unsplashCher.png"
-         alt="Церковь в Карачаевске" class="element__image">
-        <div class="element__caption">
-          <h2 class="element__name">Карачаево-Черкесск</h2>
-          <button class="element__like" type="button"></button>
-        </div>
-      </section>
-    </section>
+    </div>
   </main>
   <footer class="footer">
     <p class="footer__caption">&copy; 2021 Mesto Russia</p>

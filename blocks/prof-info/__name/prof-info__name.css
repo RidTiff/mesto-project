@@ -1,4 +1,4 @@
-.profInfo__name {
+.prof-info__name {
     grid-area: name;
     margin: 0;
     padding: 0;
@@ -7,17 +7,16 @@
     font-size: 42px;
     line-height: 48px;
     align-self: end;
-    position: relative;
-    top: 5px;
-    overflow: hidden;
     text-overflow: ellipsis;
+    max-width: 294px;
+    overflow: hidden;
+    white-space: nowrap; 
 }
 
 @media screen and (max-width: 767px) {
-    .profInfo__name {
-        width: 189px;
+    .prof-info__name {
+        max-width: 189px;
         margin: 0 auto 7px;
-        top: 0;
         font-size: 27px;
         line-height: 33px;
         text-align: center;

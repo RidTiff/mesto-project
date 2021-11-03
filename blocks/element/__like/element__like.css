@@ -10,6 +10,7 @@
     padding: 0;
     align-self: center;
     flex-shrink: 0;
+    cursor: pointer;
 }
 
 .element__like:hover {

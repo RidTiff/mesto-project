@@ -1,5 +1,5 @@
-.add-button {
-    background-image: url(../../images/Vectorplus.png);
+.prof-info__add-button {
+    background-image: url(../../../images/Vectorplus.svg);
     background-position: center;
     background-repeat: no-repeat;
     width: 150px;
@@ -10,16 +10,19 @@
     background-color: transparent;
     flex-shrink: 1;
     box-sizing: border-box;
-    border: 1px solid #fff;
+    border: 2px solid #fff;
+    border-radius: 2px;
+    cursor: pointer;
 }
 
-.add-button:hover {
+.prof-info__add-button:hover {
     opacity: .6;
 }
 
 @media screen and (max-width: 767px) {
-    .add-button {
+    .prof-info__add-button {
         width: 100%;
         margin: 0;
+        background-size: 16px;
     }
 }
