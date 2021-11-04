@@ -6,7 +6,6 @@
 * Figma
 * Картинки
 * Технологии
-* Ссылка на проект
 
 **Ссылка на проект**
 https://ridtiff.github.io/mesto-project/index.html
@@ -25,7 +24,3 @@ https://ridtiff.github.io/mesto-project/index.html
 **Технологии**
 
 В проекте используются flex, grid, абсолютное и релативное позиционирование, резиновая и адаптивная верстка, использование модификатора для открытия попапа.
-
-**Ссылка на проект**
-
-https://ridtiff.github.io/mesto-project/index.html
