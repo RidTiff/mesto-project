@@ -9,7 +9,6 @@
 <body class="page">
   <header class="header">
     <img src="./images/logo.svg" alt="Лого" class="header__logo">
-    <div class="header__line"></div>
   </header>
   <main class="content">
     <section class="profile">
@@ -19,7 +18,7 @@
         <p class="prof-info__description">Исследователь океана</p>
         <button class="prof-info__edit-button" type="button"></button>
       </div>
-      <button class="prof-info__add-button" type="button"></button>
+      <button class="profile__add-button" type="button"></button>
     </section>
     <section class="elements">
       <article class="element">
@@ -71,14 +70,14 @@
         </div>
       </article>
     </section>
-    <div class="popup">
+    <div class="popup popup_opened">
       <div class="popup__container">
         <button class="popup__close" type="button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <form action="popup" class="popup__form" method="post" name="profile">
           <fieldset class="popup__input-container">
-            <input type="text" value="Жак-Ив Кусто" name="name" class="popup__item popup__item_value_name popup__item_type_text">
-            <input type="text" value="Исследователь океана" name="description" class="popup__item popup__item_value_description popup__item_type_text">
+            <input type="text" value="Жак-Ив Кусто" name="name" class="popup__item">
+            <input type="text" value="Исследователь океана" name="description" class="popup__item">
           </fieldset>
           <button class="popup__submit" type="submit">Сохранить</button>
         </form>

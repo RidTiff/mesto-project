@@ -1,4 +1,4 @@
-.prof-info__add-button {
+.profile__add-button {
     background-image: url(../../../images/Vectorplus.svg);
     background-position: center;
     background-repeat: no-repeat;
@@ -15,14 +15,14 @@
     cursor: pointer;
 }
 
-.prof-info__add-button:hover {
+.profile__add-button:hover {
     opacity: .6;
 }
 
 @media screen and (max-width: 767px) {
-    .prof-info__add-button {
+    .profile__add-button {
         width: 100%;
-        margin: 0;
+        margin: 36px 0 0;
         background-size: 16px;
     }
 }
