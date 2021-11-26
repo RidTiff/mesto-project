@@ -63,6 +63,8 @@ function createCard(title, image) {
 
     cardElement.querySelector('.card__like').addEventListener('click', like)
 
+    cardElement.querySelector('.card__delete').addEventListener('click', deleteCard)
+
     return cardElement;
 }
 
@@ -119,4 +121,11 @@ for (let i = 0; i < initialCards.length; i++) {
 
 function like (evt) {
     evt.target.classList.toggle('card__like_active')
+}
+
+//Удаление карточки
+
+function deleteCard (evt) {
+    console.log(evt.target.parentElement);
+    evt.target.parentElement.remove();
 }
