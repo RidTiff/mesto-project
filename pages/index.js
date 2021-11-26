@@ -55,11 +55,14 @@ const imageInput = formAddCard.querySelector('.popup__input_value_image-link')
 function createCard(title, image) {
     const cardTemplate = document.querySelector('#card').content;
     const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
-    console.log(cardElement.querySelector('.card__title'));
-    cardElement.querySelector('.card__title').textContent = title;
     const imageElement = cardElement.querySelector('.card__image');
+
+    cardElement.querySelector('.card__title').textContent = title;
     imageElement.setAttribute('src', image);
     imageElement.setAttribute('alt', title);
+
+    cardElement.querySelector('.card__like').addEventListener('click', like)
+
     return cardElement;
 }
 
@@ -83,31 +86,37 @@ closeButtonAddCard.addEventListener('click', function () {
 
 const initialCards = [
     {
-      name: 'Oxxxymiron',
-      link: 'https://worldpodium.ru/sites/default/files/reper_anons.jpg'
+      name: 'Водопад',
+      link: 'https://images.unsplash.com/photo-1507896064687-d56470bc1cfa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
     },
     {
-      name: 'Неваляшка',
-      link: 'https://i09.fotocdn.net/s103/8ec5ca804cd027ee/user_l/2181749682.jpg'
+      name: 'Фонарь и лёд',
+      link: 'https://images.unsplash.com/photo-1528701790053-56b0f31e4577?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=643&q=80'
     },
     {
-      name: 'Горгород',
-      link: 'https://avatars.mds.yandex.net/get-zen_doc/1062011/pub_5b6d65f1b89e8d00a9d23868_5b6d6cb2b2cd8f00abdd9dc4/scale_1200'
+      name: 'Лестница в бамбуке',
+      link: 'https://images.unsplash.com/photo-1607619662634-3ac55ec0e216?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80'
     },
     {
-      name: 'Мох',
-      link: 'https://i.ytimg.com/vi/CfCit3iVZGg/maxresdefault.jpg'
+      name: 'Мотор',
+      link: 'https://images.unsplash.com/photo-1458942521101-2f2fb506cee3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
     },
     {
-      name: 'Кто убил Марка',
-      link: 'https://s0.rbk.ru/v6_top_pics/resized/1200xH/media/img/1/62/756375888740621.jpg'
+      name: 'Глаз-гипноз',
+      link: 'https://images.unsplash.com/photo-1495045197504-5128e3c8469f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1065&q=80'
     },
     {
-      name: 'Вагабунд',
-      link: 'https://avatars.mds.yandex.net/i?id=f3424c2484bb49761d2533931050079c-5101235-images-thumbs&n=13'
+      name: 'Лев',
+      link: 'https://images.unsplash.com/photo-1517649281203-dad836b4abe5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
     }
   ]; 
 
 for (let i = 0; i < initialCards.length; i++) {
     elements.prepend(createCard(initialCards[i].name, initialCards[i].link));
+}
+
+//Лайк
+
+function like (evt) {
+    evt.target.classList.toggle('card__like_active')
 }
