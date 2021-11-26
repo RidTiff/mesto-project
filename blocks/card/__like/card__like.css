@@ -1,4 +1,4 @@
-.element__like {
+.card__like {
     background-image: url(../../../images/LikeW.svg);
     background-position: center;
     background-color: #fff;
@@ -13,6 +13,6 @@
     cursor: pointer;
 }
 
-.element__like:hover {
+.card__like:hover {
     opacity: .5;
 }

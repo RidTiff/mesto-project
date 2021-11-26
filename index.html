@@ -70,16 +70,33 @@
         </div>
       </article>
     </section>
-    <div class="popup">
-      <div class="popup__container popup__container_place_profile">
-        <button class="popup__close" type="button"></button>
+    <div class="popup popup_type_profile">
+      <div class="popup__container popup__container_type_profile">
+        <button class="popup__close popup__close_type_profile" type="button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form action="" class="popup__form" method="post" name="profile">
+        <form action="" class="popup__form popup__form_type_profile" method="post" name="profile">
           <fieldset class="popup__input-container">
-            <input type="text" value="Жак-Ив Кусто" name="name" class="popup__input popup__input_value_name">
-            <input type="text" value="Исследователь океана" name="description" class="popup__input popup__input_value_description">
+            <input type="text" value="Жак-Ив Кусто" name="name" 
+            class="popup__input popup__input_value_name">
+            <input type="text" value="Исследователь океана" 
+            name="description" class="popup__input popup__input_value_description">
           </fieldset>
           <button class="popup__submit popup__submit_place_profile" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup_type_new-card">
+      <div class="popup__container popup__container_type_new-card">
+        <button class="popup__close popup__close_type_new-card" type="button"></button>
+        <h2 class="popup__title">Новое место</h2>
+        <form action="" class="popup__form popup__form_type_new-card">
+          <fieldset class="popup__input-container">
+            <input type="text" placeholder="Название" 
+            class="popup__input popup__input_value_title" name="title">
+            <input type="text" placeholder="Ссылка на картинку" 
+            class="popup__input popup__input_value_image-link" name="image-link">
+          </fieldset>
+          <button class="popup__submit popup__submit_place_card" type="submit">Создать</button>
         </form>
       </div>
     </div>
@@ -87,6 +104,15 @@
   <footer class="footer">
     <p class="footer__caption">&copy; 2021 Mesto Russia</p>
   </footer>
+  <template id="card">
+    <article class="card">
+      <img src="" alt="" class="card__image">
+      <div class="card__caption">
+        <h3 class="card__title"></h3>
+        <button class="card__like" type="button"></button>
+      </div>
+    </article>
+  </template>
   <script src="./pages/index.js"></script>
 </body>
 </html>

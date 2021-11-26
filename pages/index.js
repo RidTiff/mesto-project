@@ -1,31 +1,29 @@
-let profile = document.querySelector('.profile')
-let name = profile.querySelector('.prof-info__name');
-let description = profile.querySelector('.prof-info__description');
-let editButton = profile.querySelector('.prof-info__edit-button')
-let popup = document.querySelector('.popup')
-let containerForm = popup.querySelector('.popup__container_place_profile')
-let closeButton = popup.querySelector('.popup__close')
-let form = popup.querySelector('.popup__form')
-let nameInput = popup.querySelector('.popup__input_value_name');
-let descriptionInput = popup.querySelector('.popup__input_value_description');
+// Попапы. Профиль
+
+const profile = document.querySelector('.profile')
+const name = profile.querySelector('.prof-info__name');
+const description = profile.querySelector('.prof-info__description');
+const editButton = profile.querySelector('.prof-info__edit-button')
+const popup = document.querySelector('.popup')
+const popupProfile = document.querySelector('.popup_type_profile')
+const closeButtonProfile = popupProfile.querySelector('.popup__close_type_profile')
+const formProfile = popupProfile.querySelector('.popup__form_type_profile')
+const nameInput = popupProfile.querySelector('.popup__input_value_name');
+const descriptionInput = popupProfile.querySelector('.popup__input_value_description');
 
 
 
-function openPopup() {
-    popup.classList.add('popup_opened')
+
+function openForm(popup) {
+    popup.classList.add('popup_opened');
 }
 
-function closePopup() {
-    popup.classList.remove('popup_opened')
-}
-
-function openForm() {
-    containerForm.classList.add('.popup__container_opened')
-    openPopup();
+function closeForm(popup) {
+    popup.classList.remove('popup_opened');
 }
 
 function editProfile() {
-    openForm();
+    openForm(popupProfile);
     nameInput.value = name.textContent;
     descriptionInput.value = description.textContent;
 }
@@ -34,9 +32,52 @@ function submitProfile(evt) {
     evt.preventDefault();
     name.textContent = nameInput.value;
     description.textContent = descriptionInput.value;
-    closePopup;
+    closeForm(popupProfile);
 }
 
 editButton.addEventListener('click', editProfile);
-form.addEventListener('submit', submitProfile);
-closeButton.addEventListener('click', closePopup)
+formProfile.addEventListener('submit', submitProfile);
+closeButtonProfile.addEventListener('click', function () {
+    closeForm(popupProfile);
+})
+
+
+//Попапы. Добавление карточки
+
+const elements = document.querySelector('.elements')
+const addCardButton = profile.querySelector('.profile__add-button')
+const popupAddCard = document.querySelector('.popup_type_new-card')
+const closeButtonAddCard = popupAddCard.querySelector('.popup__close_type_new-card')
+const formAddCard = popupAddCard.querySelector('.popup__form_type_new-card')
+const titleInput = formAddCard.querySelector('.popup__input_value_title')
+const imageInput = formAddCard.querySelector('.popup__input_value_image-link')
+
+function createCard(title, image) {
+    const cardTemplate = document.querySelector('#card').content;
+    const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+    console.log(cardElement.querySelector('.card__title'));
+    cardElement.querySelector('.card__title').textContent = title;
+    const imageElement = cardElement.querySelector('.card__image');
+    imageElement.setAttribute('src', image);
+    imageElement.setAttribute('alt', title);
+    return cardElement;
+}
+
+function addCard() {
+    openForm(popupAddCard);
+}
+
+function submitCard(evt) {
+    evt.preventDefault();
+    elements.prepend(createCard(titleInput.value, imageInput.value));
+    closeForm(popupAddCard);
+}
+
+addCardButton.addEventListener('click', addCard);
+formAddCard.addEventListener('submit', submitCard)
+closeButtonAddCard.addEventListener('click', function () {
+    closeForm(popupAddCard);
+})
+
+//Создание 6 начальных карточек
+
