@@ -1,0 +1,10 @@
+.card__open-image {
+    border: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 282px;
+    height: 282px;
+    cursor: pointer;
+    opacity: 0;
+}

@@ -1,5 +1,4 @@
 .popup {
-    background-color: rgba(0,0,0,.5);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,9 +10,4 @@
     visibility: hidden;
     opacity: 0;
     transition: opacity .6s, visibility 0s .6s;
-}
-
-@keyframes appearance {
-    from { background-color: rgba(0,0,0, 0); }
-    to { background-color: rgba(0,0,0, .5); }
 }
