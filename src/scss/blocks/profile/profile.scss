@@ -13,7 +13,7 @@
     }
 
     &__add-button {
-        background-image: url(../images/Vectorplus.svg);
+        background-image: url(./images/Vectorplus.svg);
         background-position: center;
         background-repeat: no-repeat;
         @include size(150px, 50px, 2px);
@@ -39,7 +39,7 @@
 
     &__avatar {
         @include size(120px, 120px, 100%);
-        background-image: url(../images/imageavatar.jpg);
+        background-image: url(./images/imageavatar.jpg);
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
