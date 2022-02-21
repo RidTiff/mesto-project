@@ -1,27 +1,28 @@
 @font-face {
   font-family: "Inter";
-  src: url("../vendor/fonts/Inter-Regular.eot");
-  src: local("Inter Regular"), local("Inter-Regular"), url("../vendor/fonts/Inter-Regular.eot") format("embedded-opentype"), url("../vendor/fonts/Inter-Regular.woff2") format("woff2"), url("../vendor/fonts/Inter-Regular.woff") format("woff"), url("../vendor/fonts/Inter-Regular.ttf") format("truetype");
+  src: url("./vendor/fonts/Inter-Regular.eot");
+  src: local("Inter Regular"), local("Inter-Regular"), url("./vendor/fonts/Inter-Regular.eot") format("embedded-opentype"), url("./vendor/fonts/Inter-Regular.woff2") format("woff2"), url("./vendor/fonts/Inter-Regular.woff") format("woff"), url("./vendor/fonts/Inter-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
   font-family: "Inter";
-  src: url("../vendor/fonts/Inter-Medium.eot");
-  src: local("Inter Medium"), local("Inter-Medium"), url("../vendor/fonts/Inter-Medium.eot?#iefix") format("embedded-opentype"), url("../vendor/fonts/Inter-Medium.woff2") format("woff2"), url("../vendor/fonts/Inter-Medium.woff") format("woff"), url("../vendor/fonts/Inter-Medium.ttf") format("truetype");
+  src: url("./vendor/fonts/Inter-Medium.eot");
+  src: local("Inter Medium"), local("Inter-Medium"), url("./vendor/fonts/Inter-Medium.eot?#iefix") format("embedded-opentype"), url("./vendor/fonts/Inter-Medium.woff2") format("woff2"), url("./vendor/fonts/Inter-Medium.woff") format("woff"), url("./vendor/fonts/Inter-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
 }
 @font-face {
   font-family: "Inter";
-  src: url("../vendor/fonts/Inter-Black.eot");
-  src: local("Inter Black"), local("Inter-Black"), url("../vendor/fonts/Inter-Black.eot?#iefix") format("embedded-opentype"), url("../vendor/fonts/Inter-Black.woff2") format("woff2"), url("../vendor/fonts/Inter-Black.woff") format("woff"), url("../vendor/fonts/Inter-Black.ttf") format("truetype");
+  src: url("./vendor/fonts/Inter-Black.eot");
+  src: local("Inter Black"), local("Inter-Black"), url("./vendor/fonts/Inter-Black.eot?#iefix") format("embedded-opentype"), url("./vendor/fonts/Inter-Black.woff2") format("woff2"), url("./vendor/fonts/Inter-Black.woff") format("woff"), url("./vendor/fonts/Inter-Black.ttf") format("truetype");
   font-weight: 900;
   font-style: normal;
 }
 .page {
   --color-text: #fff;
   --color-caption: #545454;
+  --color-card: #000;
   background-color: #000;
   color: var(--color-text);
   font-family: "Inter", Arial, sans-serif;
@@ -81,7 +82,7 @@
   }
 }
 .profile__add-button {
-  background-image: url(../images/Vectorplus.svg);
+  background-image: url(./images/Vectorplus.svg);
   background-position: center;
   background-repeat: no-repeat;
   width: 150px;
@@ -110,7 +111,7 @@
   width: 120px;
   height: 120px;
   border-radius: 100%;
-  background-image: url(../images/imageavatar.jpg);
+  background-image: url(./images/imageavatar.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -173,7 +174,7 @@
   border-radius: 0;
   border: 1px solid #fff;
   box-sizing: border-box;
-  background-image: url(../images/Vectorpen.svg);
+  background-image: url(./images/Vectorpen.svg);
   background-repeat: no-repeat;
   background-position: center;
   background-color: black;
@@ -254,7 +255,6 @@
   max-width: 430px;
   background-color: white;
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
-  color: #000;
 }
 .popup__container_type_image {
   max-width: 100%;
@@ -280,7 +280,7 @@
   }
 }
 .popup__close {
-  background-image: url(../images/close.svg);
+  background-image: url(./images/close.svg);
   background-position: center;
   background-repeat: no-repeat;
   width: 32px;
@@ -314,7 +314,7 @@
   font-size: 24px;
   font-weight: 900;
   line-height: 29px;
-  color: var(--color-text);
+  color: var(--color-card);
   margin: 34px auto 54px;
   width: 330px;
 }
@@ -352,12 +352,12 @@
   box-sizing: border-box;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   padding: 0 0 13px;
-  margin: 0 0 30px;
+  margin: 13px 0 5px;
   font-size: 14px;
   font-family: inherit;
 }
-.popup__input:last-child {
-  margin-bottom: 0;
+.popup__input:first-child {
+  margin: 0 0 5px;
 }
 .popup__input:focus {
   outline: none;
@@ -366,6 +366,24 @@
   .popup__input {
     padding-bottom: 7px;
   }
+}
+.popup__input_type_error {
+  border-bottom-color: #FF0000;
+}
+.popup__input-error {
+  opacity: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 0;
+  font-family: "Inter", Arial, sans-serif;
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15px;
+  color: #FF0000;
+}
+.popup__input-error_active {
+  opacity: 1;
 }
 .popup .popup__submit {
   width: 358px;
@@ -397,6 +415,14 @@
     font-size: 14px;
     line-height: 17px;
   }
+}
+.popup .popup__submit_inactive {
+  border: 1px solid #c4c4c4;
+  box-sizing: border-box;
+  background-color: inherit;
+  color: #c4c4c4;
+  cursor: none;
+  pointer-events: none;
 }
 .popup__image {
   margin: 8px 0 10px;
@@ -455,20 +481,10 @@
   border-radius: 0;
   -o-object-fit: cover;
      object-fit: cover;
-}
-.card__open-image {
-  border: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 282px;
-  height: 282px;
-  border-radius: 0;
   cursor: pointer;
-  opacity: 0;
 }
 .card__delete {
-  background-image: url(../images/Delete.svg);
+  background-image: url(./images/Delete.svg);
   background-color: rgba(0, 0, 0, 0);
   width: 18px;
   height: 19px;
@@ -484,7 +500,6 @@
 }
 .card__caption {
   display: flex;
-  color: #000;
   justify-content: space-between;
   align-items: flex-end;
   margin: 0 0 26px;
@@ -497,7 +512,7 @@
   font-size: 24px;
   font-weight: 900;
   line-height: 29px;
-  color: var(--color-text);
+  color: var(--color-card);
   width: 190px;
   height: 29px;
   border-radius: 0;
@@ -508,7 +523,7 @@
   white-space: nowrap;
 }
 .card__like {
-  background-image: url(../images/LikeW.svg);
+  background-image: url(./images/LikeW.svg);
   background-position: center;
   background-color: #fff;
   background-repeat: no-repeat;
@@ -527,7 +542,7 @@
   opacity: 0.5;
 }
 .card__like_active {
-  background-image: url(../images/LikeB.svg);
+  background-image: url(./images/LikeB.svg);
 }
 
 .footer {
