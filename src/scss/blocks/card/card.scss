@@ -1,0 +1,68 @@
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fff;
+    font-size: 0;
+    position: relative;
+
+    &__image {
+        @include size(282px, 282px, 0);
+        object-fit: cover;
+        cursor: pointer;
+    }
+
+    &__delete {
+        background-image: url(./images/Delete.svg);
+        background-color: rgba(0, 0, 0, 0);
+        @include size(18px, 19px, 0);
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        border: 0;
+        cursor: pointer;
+
+        &:hover {
+            opacity: .6;
+        }
+    }
+
+    &__caption {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin: 0 0 26px;
+        padding: 25px 20px 0 20px;
+        font-size: 0;
+    }
+
+    &__title {
+        @include fonts(24px, 900, 29px, var(--color-card));
+        @include size(190px, 29px, 0);
+        margin: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: inline-block;
+        white-space: nowrap;
+    }
+
+    &__like {
+        background-image: url(./images/LikeW.svg);
+        background-position: center;
+        background-color: #fff;
+        background-repeat: no-repeat;
+        @include size(22px, 19px, 0);
+        border: 0;
+        @include obnull;
+        align-self: center;
+        flex-shrink: 0;
+        cursor: pointer;
+
+        &:hover {
+            opacity: .5;
+        }
+
+        &_active {
+            background-image: url(./images/LikeB.svg);
+        }
+    }
+}

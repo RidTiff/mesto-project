@@ -1,0 +1,81 @@
+.prof-info {
+    display: grid;
+    grid-template-columns: 294px 24px;
+    grid-template-areas: 
+    "name edit-button"
+    "description description";
+    gap: 16px 18px;
+    width: 336px;
+    flex-shrink: 0;
+
+    @media screen and (max-width: 767px) {
+        @include size(282px, 54px, 0);
+        display: block;
+        position: relative;
+    }
+
+    &__description {
+        grid-area: description;
+        @include obnull;
+        @include fonts(18px, 400, 22px, var(--color-text));
+        align-self: end;
+        text-overflow: ellipsis;
+        max-width: 336px;
+        overflow: hidden;
+        white-space: nowrap;
+        
+        @media screen and (max-width: 767px) {
+            width: 100%;
+            font-size: 14px;
+            line-height: 17px;
+            text-align: center;
+        }
+    }
+    
+    
+    &__edit-button {
+        @include size(24px, 24px, 0);
+        border: 1px solid #fff;
+        box-sizing: border-box;
+        background-image: url(./images/Vectorpen.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-color: black;
+        grid-area: edit-button;
+        align-self: center;
+        padding: 0;
+        cursor: pointer;
+
+        &:hover {
+            opacity: .6;
+        }
+
+        @media screen and (max-width: 767px) {
+            bottom: 0;
+            @include size(18px, 18px, 0);
+            position: absolute;
+            top: 7px;
+            right: 20px;
+        }
+    }
+
+    &__name {
+        grid-area: name;
+        @include obnull;
+        @include fonts(42px, 500, 48px, var(--color-text));
+        align-self: end;
+        text-overflow: ellipsis;
+        max-width: 294px;
+        overflow: hidden;
+        white-space: nowrap;
+        
+        @media screen and (max-width: 767px) {
+            max-width: 189px;
+            margin: 0 auto 7px;
+            font-size: 27px;
+            line-height: 33px;
+            text-align: center;
+        }
+    }
+}
+

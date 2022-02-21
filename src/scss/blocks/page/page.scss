@@ -1,0 +1,10 @@
+.page {
+    --color-text: #fff;
+    --color-caption: #545454;
+    --color-card: #000;
+
+    background-color: #000;
+    color: var(--color-text);
+    font-family: 'Inter', Arial, sans-serif;
+    @include obnull;
+}

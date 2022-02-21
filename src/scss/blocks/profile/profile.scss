@@ -1,0 +1,56 @@
+.profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    max-width: 880px;
+    @include size(100%, 0, 0);
+    margin: 0 auto 50px;
+
+    @media screen and (max-width: 767px) {
+        flex-direction: column;
+        @include size(282px, 0, 0);
+        margin-bottom: 36px;
+    }
+
+    &__add-button {
+        background-image: url(./images/Vectorplus.svg);
+        background-position: center;
+        background-repeat: no-repeat;
+        @include size(150px, 50px, 2px);
+        min-width: 50px;
+        margin-left: auto;
+        padding: 0;
+        background-color: transparent;
+        flex-shrink: 1;
+        box-sizing: border-box;
+        border: 2px solid #fff;
+        cursor: pointer;
+
+        &:hover {
+            opacity: .6;
+        }
+        
+        @media screen and (max-width: 767px) {
+            width: 100%;
+            margin: 36px 0 0;
+            background-size: 16px;
+        }
+    }
+
+    &__avatar {
+        @include size(120px, 120px, 100%);
+        background-image: url(./images/imageavatar.jpg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin: 0;
+        margin-right: 30px;
+        flex-shrink: 0;
+
+        @media screen and (max-width: 767px) {
+            margin-right: 0;
+            margin-bottom: 26px;
+        }
+    }
+}
+
