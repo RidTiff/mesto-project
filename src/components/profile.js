@@ -1,5 +1,5 @@
 // Попапы. Профиль
-import { openForm, closeForm } from "./popup.js";
+import { openPopup, closePopup } from "./modal.js";
 
 const profile = document.querySelector('.profile')
 const name = profile.querySelector('.prof-info__name');
@@ -15,7 +15,7 @@ const descriptionInput = formProfile.elements.description;
 
 
 function editProfile() {
-    openForm(popupProfile);
+    openPopup(popupProfile);
     nameInput.value = name.textContent;
     descriptionInput.value = description.textContent;
 }
@@ -24,7 +24,7 @@ function submitProfile(evt) {
     evt.preventDefault();
     name.textContent = nameInput.value;
     description.textContent = descriptionInput.value;
-    closeForm(popupProfile);
+    closePopup(popupProfile);
 }
 
 export default () => {

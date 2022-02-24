@@ -1,6 +1,6 @@
-import './index.css';
+import '../index.css';
 
-import {enableValidation} from './forms.js'; //Формы
+import {enableValidation} from './validate.js'; //Формы
 enableValidation({
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
@@ -10,14 +10,14 @@ enableValidation({
     errorClass: 'popup__input-error_active'
 });
 
-import {popupInteraction} from './components/popup.js'; //Попапы
+import {popupInteraction} from './modal.js'; //Попапы
 popupInteraction();
 
-import editProfile from './components/profile.js'; //Профиль
+import editProfile from './profile.js'; //Профиль
 
 editProfile();
 
-import {openAddCardPopup, submitCard, createStartCards} from './components/cards.js'; //Карточки
+import {openAddCardPopup, submitCard, createStartCards} from './card.js'; //Карточки
 document.querySelector('.profile__add-button').addEventListener('click', openAddCardPopup);
 document.forms.card.addEventListener('submit', submitCard);
 createStartCards();
