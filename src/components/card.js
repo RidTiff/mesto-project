@@ -1,7 +1,9 @@
 //Попапы. Добавление карточки
-import { openForm, closeForm } from "./popup.js";
+import { openPopup, closePopup } from "./modal.js";
 
-const popupAddCard = document.querySelector('.popup_type_new-card')
+const popupAddCard = document.querySelector('.popup_type_new-card');
+
+const elements = document.querySelector('.elements');
 
 const formAddCard = document.forms.card;
 const titleInput = formAddCard.elements.title;
@@ -16,44 +18,46 @@ function createCard(title, image) {
     imageElement.setAttribute('src', image);
     imageElement.setAttribute('alt', title);
 
+    cardElement.addEventListener('click', function (evt) {
+      if (evt.target.classList.contains('card__like')) {
+        evt.target.classList.toggle('card__like_active');
+      } else if (evt.target.classList.contains('card__delete')) {
+        evt.target.closest('.card').remove();
+      } else if (evt.target.classList.contains('card__image')) {
+        openImage(evt);
+      }
+    });
+
     return cardElement;
 }
 
 //Взаимодействие с карточкой 
 
-const elements = document.querySelector('.elements')
 
-const cardInteraction = () => {
-  elements.addEventListener('click', function (evt) {
-    if (evt.target.classList.contains('card__like')) {
-      evt.target.classList.toggle('card__like_active');
-    } else if (evt.target.classList.contains('card__delete')) {
-      evt.target.parentElement.remove();
-    } else if (evt.target.classList.contains('card__image')) {
-      openImage(evt);
-    }
-  });
-}
 
-function addCard() {
-  openForm(popupAddCard);
+
+function openAddCardPopup() {
+  openPopup(popupAddCard);
 }
 
 function submitCard(evt) {
   evt.preventDefault();
   elements.prepend(createCard(titleInput.value, imageInput.value));
   formAddCard.reset();
-  closeForm(popupAddCard);
+  formAddCard.elements.submit.classList.add('popup__submit_inactive');
+  formAddCard.elements.submit.setAttribute('disabled', true);
+  closePopup(popupAddCard);
 }
 
 // Попап для изображения
 const popupImage = document.querySelector('.popup_type_image')
 
 function openPopupImage(image, caption) {
-  popupImage.querySelector('.popup__image').setAttribute('src', image);
-  popupImage.querySelector('.popup__image').setAttribute('alt', caption);
+  const imageInPopup = popupImage.querySelector('.popup__image');
+  imageInPopup.setAttribute('src', image);
+  imageInPopup.setAttribute('alt', caption);
   popupImage.querySelector('.popup__caption').textContent = caption;
-  openForm(popupImage);
+  openPopup(popupImage);
 }
 
 function openImage (evt) {
@@ -102,4 +106,4 @@ const createStartCards = () => {
     }
 }
 
-export {addCard, submitCard, createStartCards, cardInteraction};
+export {openAddCardPopup, submitCard, createStartCards};
