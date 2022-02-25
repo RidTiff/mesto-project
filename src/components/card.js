@@ -13,14 +13,22 @@ function createCard(title, image) {
     const cardTemplate = document.querySelector('#card').content;
     const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
     const imageElement = cardElement.querySelector('.card__image');
+    const likeElement = cardElement.querySelector('.card__like-heart');
+    const countElement = cardElement.querySelector('.card__like-count');
 
     cardElement.querySelector('.card__title').textContent = title;
     imageElement.setAttribute('src', image);
     imageElement.setAttribute('alt', title);
 
     cardElement.addEventListener('click', function (evt) {
-      if (evt.target.classList.contains('card__like')) {
-        evt.target.classList.toggle('card__like_active');
+      if (evt.target.classList.contains('card__like-heart')) {
+        if (evt.target.classList.contains('card__like-heart_active')){
+          likeElement.classList.remove('card__like-heart_active');
+          countElement.textContent--;
+        } else {
+          likeElement.classList.add('card__like-heart_active');
+          countElement.textContent++
+        }
       } else if (evt.target.classList.contains('card__delete')) {
         evt.target.closest('.card').remove();
       } else if (evt.target.classList.contains('card__image')) {
