@@ -9,9 +9,9 @@ const elements = document.querySelector('.elements');
 const formAddCard = document.forms.card;
 const titleInput = formAddCard.elements.title;
 const imageInput = formAddCard.elements.link;
+const cardTemplate = document.querySelector('#card').content;
 
 function createCard(title, image, author, likeCount, id) {
-    const cardTemplate = document.querySelector('#card').content;
     const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
     const imageElement = cardElement.querySelector('.card__image');
     const likeElement = cardElement.querySelector('.card__like-heart');
@@ -66,10 +66,10 @@ function submitCard(evt) {
 }
 
 // Попап для изображения
-const popupImage = document.querySelector('.popup_type_image')
+const popupImage = document.querySelector('.popup_type_image');
+const imageInPopup = popupImage.querySelector('.popup__image');
 
 function openPopupImage(image, caption) {
-  const imageInPopup = popupImage.querySelector('.popup__image');
   imageInPopup.setAttribute('src', image);
   imageInPopup.setAttribute('alt', caption);
   popupImage.querySelector('.popup__caption').textContent = caption;
