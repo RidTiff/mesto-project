@@ -54,3 +54,11 @@ export const enableValidation = (settings = {}) => {
   });
 };
 
+export function renderLoading(form, isLoading) {
+  const button = form.querySelector('.popup__submit')
+  if (isLoading) {
+    button.textContent = 'Сохранение...';
+  } else {
+    button.textContent = 'Сохранить';
+  }
+}
