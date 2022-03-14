@@ -1,5 +1,6 @@
 //Попапы. Добавление карточки
 import { openPopup, closePopup } from "./modal.js";
+import { postCard, deleteCard, putLike, deleteLike } from "./api.js";
 
 const popupAddCard = document.querySelector('.popup_type_new-card');
 
@@ -9,28 +10,33 @@ const formAddCard = document.forms.card;
 const titleInput = formAddCard.elements.title;
 const imageInput = formAddCard.elements.link;
 
-function createCard(title, image) {
+function createCard(title, image, author, likeCount, id) {
     const cardTemplate = document.querySelector('#card').content;
     const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
     const imageElement = cardElement.querySelector('.card__image');
     const likeElement = cardElement.querySelector('.card__like-heart');
     const countElement = cardElement.querySelector('.card__like-count');
+    const deleteElement = cardElement.querySelector('.card__delete')
 
     cardElement.querySelector('.card__title').textContent = title;
     imageElement.setAttribute('src', image);
     imageElement.setAttribute('alt', title);
+    if(!author) {
+      deleteElement.remove();
+    }
+    countElement.textContent = likeCount;
 
     cardElement.addEventListener('click', function (evt) {
       if (evt.target.classList.contains('card__like-heart')) {
         if (evt.target.classList.contains('card__like-heart_active')){
           likeElement.classList.remove('card__like-heart_active');
-          countElement.textContent--;
+          deleteLike(id, countElement);
         } else {
           likeElement.classList.add('card__like-heart_active');
-          countElement.textContent++
+          putLike(id, countElement);
         }
       } else if (evt.target.classList.contains('card__delete')) {
-        evt.target.closest('.card').remove();
+        deleteCard(evt, id);
       } else if (evt.target.classList.contains('card__image')) {
         openImage(evt);
       }
@@ -42,7 +48,9 @@ function createCard(title, image) {
 //Взаимодействие с карточкой 
 
 
-
+export function renderLikes(countElement, number) {
+  countElement.textContent = number;
+}
 
 function openAddCardPopup() {
   openPopup(popupAddCard);
@@ -50,7 +58,7 @@ function openAddCardPopup() {
 
 function submitCard(evt) {
   evt.preventDefault();
-  elements.prepend(createCard(titleInput.value, imageInput.value));
+  postCard(titleInput.value, imageInput.value);
   formAddCard.reset();
   formAddCard.elements.submit.classList.add('popup__submit_inactive');
   formAddCard.elements.submit.setAttribute('disabled', true);
@@ -72,46 +80,8 @@ function openImage (evt) {
   openPopupImage(evt.target.src, evt.target.alt)
 }
 
-//Создание 6 начальных карточек
-
-import waterfall from '../images/waterfall.jpg';
-import flashlight from '../images/flashlight.jpg';
-import bamboo from '../images/bamboo.jpg';
-import motor from '../images/motor.jpg';
-import eye from '../images/eye.jpg';
-import lion from '../images/lion.jpg';
-
-const initialCards = [
-    {
-      name: 'Водопад',
-      link: waterfall
-    },
-    {
-      name: 'Фонарь и лёд',
-      link: flashlight
-    },
-    {
-      name: 'Лестница в бамбуке',
-      link: bamboo
-    },
-    {
-      name: 'Мотор',
-      link: motor
-    },
-    {
-      name: 'Глаз-гипноз',
-      link: eye
-    },
-    {
-      name: 'Лев',
-      link: lion
-    }
-]; 
-
-const createStartCards = () => {
-    for (let i = 0; i < initialCards.length; i++) {
-    elements.prepend(createCard(initialCards[i].name, initialCards[i].link));
-    }
+const showCard = (title, image, author, likeCount, id) => {
+  elements.prepend(createCard(title, image, author, likeCount, id));
 }
 
-export {openAddCardPopup, submitCard, createStartCards};
+export {openAddCardPopup, submitCard, showCard};

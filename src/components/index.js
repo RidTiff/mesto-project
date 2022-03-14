@@ -1,5 +1,12 @@
 import '../index.css';
 
+const userAvatar = document.querySelector('.profile__avatar');
+
+import {getUser, getCards} from './api.js';
+getUser(userAvatar);
+getCards();
+
+
 import {enableValidation} from './validate.js'; //Формы
 enableValidation({
     formSelector: '.popup__form',
@@ -14,10 +21,8 @@ import {popupInteraction} from './modal.js'; //Попапы
 popupInteraction();
 
 import editProfile from './profile.js'; //Профиль
-
 editProfile();
 
-import {openAddCardPopup, submitCard, createStartCards} from './card.js'; //Карточки
+import {openAddCardPopup, submitCard} from './card.js'; //Карточки
 document.querySelector('.profile__add-button').addEventListener('click', openAddCardPopup);
 document.forms.card.addEventListener('submit', submitCard);
-createStartCards();

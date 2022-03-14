@@ -11,7 +11,10 @@
   </header>
   <main class="content">
     <section class="profile">
-      <div class="profile__avatar"></div>
+      <div class="profile__avatar-container">
+        <img src="#" alt="avatar" class="profile__avatar">
+        <button type="button" class="profile__avatar-button"></button>
+      </div>
       <div class="prof-info">
         <h1 class="prof-info__name">Жак-Ив Кусто</h1>
         <p class="prof-info__description">Исследователь океана</p>
@@ -39,6 +42,20 @@
         </form>
       </div>
     </div>
+    <div class="popup popup_type_avatar">
+      <div class="popup__container popup__container_type_avatar">
+        <button class="popup__close popup__close_type_avatar" type="button"></button>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form action="#" novalidate class="popup__form popup__form_type_avatar" method="post" name="avatar">
+          <fieldset class="popup__input-container">
+            <input type="url" placeholder="Ссылка на картинку" required
+            class="popup__input popup__input_value_image-link" name="link" id="link-avatar">
+            <span class="popup__input-error link-avatar-error">Вы пропустили это поле.</span>
+          </fieldset>
+          <button class="popup__submit popup__submit_place_avatar" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
     <div class="popup popup_type_new-card">
       <div class="popup__container popup__container_type_new-card">
         <button class="popup__close popup__close_type_new-card" type="button"></button>
@@ -61,13 +78,6 @@
         <button class="popup__close popup__close_type_image"></button>
         <img src="#" alt="" class="popup__image">
         <h2 class="popup__caption"></h2>
-      </div>
-    </div>
-    <div class="popup popup_type_confirm">
-      <div class="popup__container popup__container_type_confirm">
-        <button class="popup__close popup__close_type_close"></button>
-        <h2 class="popup__title"></h2>
-        <button class="popup__submit popup__submit_place_confirm" type="submit">Да</button>
       </div>
     </div>
   </main>
