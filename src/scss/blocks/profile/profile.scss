@@ -38,18 +38,44 @@
     }
 
     &__avatar {
+        @include obnull;
+        display: block;
+        height: 120px;
+    }
+
+    &__avatar-container {
         @include size(120px, 120px, 100%);
-        background-image: url(./images/imageavatar.jpg);
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
         margin: 0;
         margin-right: 30px;
         flex-shrink: 0;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
 
         @media screen and (max-width: 767px) {
             margin-right: 0;
             margin-bottom: 26px;
+        }
+    }
+
+    &__avatar-button {
+        @include obnull;
+        border: 0;
+        @include size(100%, 100%, 100%);
+        position: absolute;
+        background-image: url(./images/Vectorpen.svg);
+        background-size: 26px 26px;
+        background-position: center;
+        background-repeat: no-repeat;
+        opacity: 0;
+        transition: opacity .6s;
+
+        &:hover {
+            opacity: 1;
+            transition: opacity .6s;
+            background-color: rgba(0,0,0,.8);
         }
     }
 }
