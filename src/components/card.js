@@ -11,7 +11,7 @@ const titleInput = formAddCard.elements.title;
 const imageInput = formAddCard.elements.link;
 const cardTemplate = document.querySelector('#card').content;
 
-function createCard(title, image, author, likeCount, id) {
+function createCard(title, image, author, likeCount, putMyLike, id) {
     const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
     const imageElement = cardElement.querySelector('.card__image');
     const likeElement = cardElement.querySelector('.card__like-heart');
@@ -21,22 +21,41 @@ function createCard(title, image, author, likeCount, id) {
     cardElement.querySelector('.card__title').textContent = title;
     imageElement.setAttribute('src', image);
     imageElement.setAttribute('alt', title);
+
     if(!author) {
       deleteElement.remove();
     }
+
+    if(putMyLike) {
+      likeElement.classList.add('card__like-heart_active');
+    }
+
     countElement.textContent = likeCount;
 
     cardElement.addEventListener('click', function (evt) {
       if (evt.target.classList.contains('card__like-heart')) {
         if (evt.target.classList.contains('card__like-heart_active')){
-          likeElement.classList.remove('card__like-heart_active');
-          deleteLike(id, countElement);
+          deleteLike(id, countElement)
+            .then(() => {
+              likeElement.classList.remove('card__like-heart_active');
+            })
+            .catch((err) => {
+              console.log(`Ошибка: ${err}`);
+            });
         } else {
-          likeElement.classList.add('card__like-heart_active');
-          putLike(id, countElement);
+          putLike(id, countElement)
+            .then(() => {
+              likeElement.classList.add('card__like-heart_active');
+            })
+            .catch((err) => {
+              console.log(`Ошибка: ${err}`);
+            });
         }
       } else if (evt.target.classList.contains('card__delete')) {
-        deleteCard(evt, id);
+        deleteCard(evt, id)
+          .catch((err) => {
+            console.log(`Ошибка: ${err}`);
+          });
       } else if (evt.target.classList.contains('card__image')) {
         openImage(evt);
       }
@@ -58,7 +77,13 @@ function openAddCardPopup() {
 
 function submitCard(evt) {
   evt.preventDefault();
-  postCard(titleInput.value, imageInput.value);
+  postCard(titleInput.value, imageInput.value)
+    .then(() => {
+      closePopup(popupAddCard);
+    })
+    .catch((err) => {
+      console.log(`Ошибка: ${err}`);
+    });
   formAddCard.reset();
   formAddCard.elements.submit.classList.add('popup__submit_inactive');
   formAddCard.elements.submit.setAttribute('disabled', true);
@@ -68,11 +93,12 @@ function submitCard(evt) {
 // Попап для изображения
 const popupImage = document.querySelector('.popup_type_image');
 const imageInPopup = popupImage.querySelector('.popup__image');
+const popupCaption = popupImage.querySelector('.popup__caption')
 
 function openPopupImage(image, caption) {
   imageInPopup.setAttribute('src', image);
   imageInPopup.setAttribute('alt', caption);
-  popupImage.querySelector('.popup__caption').textContent = caption;
+  popupCaption.textContent = caption;
   openPopup(popupImage);
 }
 
@@ -80,8 +106,8 @@ function openImage (evt) {
   openPopupImage(evt.target.src, evt.target.alt)
 }
 
-const showCard = (title, image, author, likeCount, id) => {
-  elements.prepend(createCard(title, image, author, likeCount, id));
+const showCard = (title, image, author, likeCount, putMyLike, id) => {
+  elements.prepend(createCard(title, image, author, likeCount, putMyLike, id));
 }
 
 export {openAddCardPopup, submitCard, showCard};

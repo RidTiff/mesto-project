@@ -10,7 +10,7 @@ const description = profile.querySelector('.prof-info__description');
 const editButton = profile.querySelector('.prof-info__edit-button')
 const popupProfile = document.querySelector('.popup_type_profile')
 
-const formProfile = document.forms.profile;
+export const formProfile = document.forms.profile;
 const nameInput = formProfile.elements.name;
 const descriptionInput = formProfile.elements.description;
 
@@ -29,9 +29,16 @@ export function renderProfile(userName, userAbout) {
 
 function submitProfile(evt) {
     evt.preventDefault();
-    patchProfile(nameInput.value, descriptionInput.value);
-    renderLoading(formProfile, false);
-    closePopup(popupProfile);
+    patchProfile(nameInput.value, descriptionInput.value)
+        .then(() => {
+            closePopup(popupProfile);
+        })
+        .catch((err) => {
+            console.log(`Ошибка: ${err}`);
+        })
+        .finally(() => {
+            renderLoading(formProfile, false);
+        })
 }
 
 
@@ -48,9 +55,16 @@ function editAvatar() {
 
 function submitAvatar(evt) {
     evt.preventDefault();
-    patchAvatar(linkAvatar.value);
-    renderLoading(formAvatar, false);
-    closePopup(popupAvatar);
+    patchAvatar(linkAvatar.value)
+        .then(() => {
+            closePopup(popupAvatar);
+        })
+        .catch((err) => {
+            console.log(`Ошибка: ${err}`);
+        })
+        .finally(() => {
+            renderLoading(formAvatar, false);
+        })
     formAvatar.elements.submit.classList.add('popup__submit_inactive');
     formAvatar.elements.submit.setAttribute('disabled', true);
 }
