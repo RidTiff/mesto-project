@@ -1,24 +1,19 @@
-import { renderProfile, renderAvatar } from "./profile";
+import { renderProfile, renderAvatar, formProfile } from "./profile";
 
-export function getUser(avatar) {
+function checkResponse (res) {
+    if (res.ok) {
+        return res.json();
+    }
+    return Promise.reject(res.status);
+}
+
+export function getUser() {
     return fetch('https://nomoreparties.co/v1/plus-cohort-6/users/me', {
         headers: {
             authorization: 'a5873ca2-eb5b-4cfd-9dad-a8ba3d811b6c'
         }
     })
-    .then((res) => {
-        if (res.ok) {
-            return res.json();
-        }
-        return Promise.reject(res.status);
-    })
-    .then((result) => {
-        renderProfile(result.name, result.about);
-        avatar.src = result.avatar;
-    })
-    .catch((err) => {
-        console.log(`Ошибка: ${err}`);
-    })
+    .then((res) => checkResponse (res))
 }
 
 export function patchProfile(name, about) {
@@ -33,17 +28,9 @@ export function patchProfile(name, about) {
             'Content-Type': 'application/json; charset=UTF-8'
         }
     })
-    .then((res) => {
-        if (res.ok) {
-            return res.json();
-        }
-        return Promise.reject(res.status);
-    })
+    .then((res) => checkResponse (res))
     .then((result) => {
         renderProfile(result.name, result.about);
-    })
-    .catch((err) => {
-        console.log(`Ошибка: ${err}`);
     })
 }
 
@@ -58,47 +45,38 @@ export function patchAvatar(avatar) {
             'Content-Type': 'application/json; charset=UTF-8'
         }
     })
-    .then((res) => {
-        if (res.ok) {
-            return res.json();
-        }
-        return Promise.reject(res.status);
-    })
+    .then((res) => checkResponse (res))
     .then((result) => {
         renderAvatar(result.avatar);
-    })
-    .catch((err) => {
-        console.log(`Ошибка: ${err}`);
     })
 }
 
 import { showCard, renderLikes } from "./card";
 
-export function getCards() {
+export function getCards(user) {
     return fetch('https://nomoreparties.co/v1/plus-cohort-6/cards', {
         headers: {
             authorization: 'a5873ca2-eb5b-4cfd-9dad-a8ba3d811b6c'
         }
     })
-    .then((res) => {
-        if (res.ok) {
-            return res.json();
-        }
-        return Promise.reject(res.status);
-    })
-    .then((result) => {
-        result.forEach(element => {
-            let deleteCard;
-            if (element.owner._id == 'e3a866676e6e0a34dd6c60a8') {
+    .then((res) => checkResponse (res))
+    .then((cards) => {
+        cards.forEach(element => {
+            const userId = user._id;
+            let deleteCard = false;
+            let checkLike = false;
+            if (element.owner._id == userId) {
                 deleteCard = true;
-            } else {
-                deleteCard = false;
             }
-            showCard(element.name, element.link, deleteCard, element.likes.length, element._id);
+            for (let i = 0; i < element.likes.length; i++) {
+                if (element.likes[i]._id == userId) {
+                    checkLike = true;
+                    break
+                }
+            };
+
+            showCard(element.name, element.link, deleteCard, element.likes.length, checkLike, element._id);
         });
-    })
-    .catch((err) => {
-        console.log(`Ошибка: ${err}`);
     })
 }
 
@@ -114,17 +92,9 @@ export function postCard(name, link) {
             'Content-Type': 'application/json; charset=UTF-8'
         }
     })
-    .then((res) => {
-        if (res.ok) {
-            return res.json();
-        }
-        return Promise.reject(res.status);
-    })
+    .then((res) => checkResponse (res))
     .then((result) => {
-        showCard(result.name, result.link, true, 0, result._id);
-    })
-    .catch((err) => {
-        console.log(`Ошибка: ${err}`);
+        showCard(result.name, result.link, true, 0, false, result._id);
     })
 }
 
@@ -135,17 +105,9 @@ export function deleteCard(evt, id) {
             authorization: 'a5873ca2-eb5b-4cfd-9dad-a8ba3d811b6c'
         }
     })
-    .then((res) => {
-        if (res.ok) {
-            return res.json();
-        }
-        return Promise.reject(res.status);
-    })
+    .then((res) => checkResponse (res))
     .then(() => {
         evt.target.closest('.card').remove()
-    })
-    .catch((err) => {
-        console.log(`Ошибка: ${err}`);
     })
 }
 
@@ -157,17 +119,9 @@ export function putLike(id, countElement) {
             authorization: 'a5873ca2-eb5b-4cfd-9dad-a8ba3d811b6c'
         }
     })
-    .then((res) => {
-        if (res.ok) {
-            return res.json();
-        }
-        return Promise.reject(res.status);
-    })
+    .then((res) => checkResponse (res))
     .then((result) => {
         renderLikes(countElement, result.likes.length);
-    })
-    .catch((err) => {
-        console.log(`Ошибка: ${err}`);
     })
 }
 
@@ -178,16 +132,8 @@ export function deleteLike(id, countElement) {
             authorization: 'a5873ca2-eb5b-4cfd-9dad-a8ba3d811b6c'
         }
     })
-    .then((res) => {
-        if (res.ok) {
-            return res.json();
-        }
-        return Promise.reject(res.status);
-    })
+    .then((res) => checkResponse (res))
     .then((result) => {
         renderLikes(countElement, result.likes.length);
-    })
-    .catch((err) => {
-        console.log(`Ошибка: ${err}`);
     })
 }
