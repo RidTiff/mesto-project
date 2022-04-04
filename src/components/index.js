@@ -3,8 +3,22 @@ import '../index.css';
 const userAvatar = document.querySelector('.profile__avatar');
 
 import {getUser, getCards} from './api.js';
-getUser(userAvatar);
-getCards();
+import {renderProfile} from './profile.js'
+
+
+
+getUser()
+    .then((user) => {
+        renderProfile(user.name, user.about);
+        userAvatar.src = user.avatar;
+        return getCards(user)
+            .catch((err) => {
+                console.log(`Ошибка: ${err}`);
+            })
+    })
+    .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+    })
 
 
 import {enableValidation} from './validate.js'; //Формы
@@ -24,5 +38,6 @@ import editProfile from './profile.js'; //Профиль
 editProfile();
 
 import {openAddCardPopup, submitCard} from './card.js'; //Карточки
+import { get } from 'core-js/core/dict';
 document.querySelector('.profile__add-button').addEventListener('click', openAddCardPopup);
 document.forms.card.addEventListener('submit', submitCard);
