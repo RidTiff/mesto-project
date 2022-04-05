@@ -137,3 +137,63 @@ export function deleteLike(id, countElement) {
         renderLikes(countElement, result.likes.length);
     })
 }
+
+
+//API Класс
+export class Api {
+    constructor(options) {
+      this.host = options.host;
+      this.authorization = options.authorization;
+    }
+
+    checkResponse (res) {
+        if (res.ok) {
+            return res.json();
+        }
+        return Promise.reject(res.status);
+    }
+
+    getUser() {
+        return fetch(this.host, {
+            headers: {
+                authorization: this.authorization
+            }
+        })
+        .then((res) => checkResponse (res))
+    }
+
+    patchProfile(name, about) {
+        return fetch(this.host, {
+            method: 'PATCH',
+            body: JSON.stringify ({
+                name: name,
+                about: about
+            }),
+            headers: {
+                authorization: this.authorization,
+                'Content-Type': 'application/json; charset=UTF-8'
+            }
+        })
+        .then((res) => checkResponse (res))
+        .then((result) => {
+            renderProfile(result.name, result.about);
+        })
+    }
+
+    patchAvatar(avatar) {
+        return fetch('https://nomoreparties.co/v1/plus-cohort-6/users/me/avatar', {
+            method: 'PATCH',
+            body: JSON.stringify ({
+                avatar: avatar
+            }),
+            headers: {
+                authorization: 'a5873ca2-eb5b-4cfd-9dad-a8ba3d811b6c',
+                'Content-Type': 'application/json; charset=UTF-8'
+            }
+        })
+        .then((res) => checkResponse (res))
+        .then((result) => {
+            renderAvatar(result.avatar);
+        })
+    }
+}

@@ -4,6 +4,8 @@ import { patchProfile, patchAvatar } from "./api.js";
 
 import { renderLoading } from "./validate";
 
+import {api} from './index'; 
+
 const profile = document.querySelector('.profile')
 const name = profile.querySelector('.prof-info__name');
 const description = profile.querySelector('.prof-info__description');
@@ -29,7 +31,7 @@ export function renderProfile(userName, userAbout) {
 
 function submitProfile(evt) {
     evt.preventDefault();
-    patchProfile(nameInput.value, descriptionInput.value)
+    api.patchProfile(nameInput.value, descriptionInput.value)
         .then(() => {
             closePopup(popupProfile);
         })
@@ -37,7 +39,7 @@ function submitProfile(evt) {
             console.log(`Ошибка: ${err}`);
         })
         .finally(() => {
-            renderLoading(formProfile, false);
+            renderLoading(formProfile, false);s
         })
 }
 
