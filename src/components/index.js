@@ -4,6 +4,10 @@ const userAvatar = document.querySelector('.profile__avatar');
 
 import { getUser, getCards } from './api.js';
 import { renderProfile } from './profile.js';
+
+import { UserInfo } from './UserInfo.js';
+
+
 import { elements } from './card.js';
 
 import { Section } from './Section.js';
@@ -17,8 +21,6 @@ const section = new Section(
   elements
 );
 
-console.log(elements);
-console.log(section);
 
 getUser()
   .then((user) => {
