@@ -1,6 +1,7 @@
 //Формы
+import {FormValidator} from "./FormValidator.js";
 
-const checkInputValidity = (formElement, inputElement, settings) => {
+/*const checkInputValidity = (formElement, inputElement, settings) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   if (!inputElement.validity.valid) {
     inputElement.classList.add(settings.inputErrorClass);
@@ -40,17 +41,14 @@ const toggleButtonState = (inputList, buttonElement, settings) => {
     buttonElement.classList.remove(settings.inactiveButtonClass);
     buttonElement.removeAttribute('disabled');
   }
-}
+}*/
 
 export const enableValidation = (settings = {}) => {
   
   const formList = document.querySelectorAll(settings.formSelector);
   formList.forEach((formElement) => {
-    formElement.addEventListener('submit', function (evt) {
-      evt.preventDefault();
-  });
-
-  setEventListeners(formElement, settings);
+    const formValidator = new FormValidator(settings,formElement);
+    formValidator.enableValidation();
   });
 };
 
