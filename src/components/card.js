@@ -107,7 +107,8 @@ function openImage (evt) {
 }
 
 const showCard = (title, image, author, likeCount, putMyLike, id) => {
-  elements.prepend(createCard(title, image, author, likeCount, putMyLike, id));
+  const card = new Card({title:title, image:image, author:author, likeCount:likeCount, putMyLike:putMyLike, id:id})
+  elements.prepend(card.generate());
 }
 
 export {openAddCardPopup, submitCard, showCard};
@@ -123,6 +124,7 @@ class Card {
     this.putMyLike = data.putMyLike;
     this.likeCount = data.likeCount;
     this.selector = selector;
+    this.id = data.id;
   }
 
   _getElement() {
@@ -178,7 +180,7 @@ _setEventListeners() {
           });
       }
     } else if (evt.target.classList.contains('card__delete')) {
-      api.deleteCard(evt, id)
+      api.deleteCard(evt, this.id)
         .catch((err) => {
           console.log(`Ошибка: ${err}`);
         });
