@@ -1,4 +1,5 @@
 import { renderProfile, renderAvatar, formProfile } from './profile';
+
 //API Класс
 export class Api {
     constructor(options) {

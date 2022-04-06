@@ -5,10 +5,9 @@ import { patchProfile, patchAvatar } from './api.js';
 import { renderLoading } from './validate';
 
 
-
 import {api} from './index'; 
 
-const profile = document.querySelector('.profile')
+const profile = document.querySelector('.profile');
 const name = profile.querySelector('.prof-info__name');
 const description = profile.querySelector('.prof-info__description');
 const editButton = profile.querySelector('.prof-info__edit-button');
