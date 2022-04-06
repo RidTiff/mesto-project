@@ -4,6 +4,7 @@ import { patchProfile, patchAvatar } from './api.js';
 
 import { renderLoading } from './validate';
 
+
 import {api} from './index'; 
 
 const profile = document.querySelector('.profile');
@@ -28,6 +29,7 @@ export function renderProfile(userName, userAbout) {
 }
 
 function submitProfile(evt) {
+
     evt.preventDefault();
     api.patchProfile(nameInput.value, descriptionInput.value)
         .then(() => {
