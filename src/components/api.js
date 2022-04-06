@@ -1,130 +1,145 @@
 import { renderProfile, renderAvatar, formProfile } from './profile';
 
-const config = {
-  baseUrl: 'https://nomoreparties.co/v1/plus-cohort-6/',
-  headers: {
-    authorization: 'a5873ca2-eb5b-4cfd-9dad-a8ba3d811b6c',
-    'Content-Type': 'application/json',
-  },
-};
+//API Класс
+export class Api {
+    constructor(options) {
+      this.host = options.host;
+      this.authorization = options.authorization;
+    }
 
-function checkResponse(res) {
-  return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
-}
-
-export function getUser() {
-  return fetch(`${config.baseUrl}/users/me`, {
-    headers: config.headers,
-  }).then((res) => checkResponse(res));
-}
-
-export function patchProfile(name, about) {
-  return fetch(`${config.baseUrl}/users/me`, {
-    method: 'PATCH',
-    headers: config.headers,
-    body: JSON.stringify({
-      name: name,
-      about: about,
-    }),
-  })
-    .then((res) => checkResponse(res))
-    .then((result) => {
-      renderProfile(result.name, result.about);
-    });
-}
-
-export function patchAvatar(avatar) {
-  return fetch(`${config.baseUrl}/users/me/avatar`, {
-    method: 'PATCH',
-    headers: config.headers,
-    body: JSON.stringify({
-      avatar: avatar,
-    }),
-  })
-    .then((res) => checkResponse(res))
-    .then((result) => {
-      renderAvatar(result.avatar);
-    });
-}
-
-import { showCard, renderLikes } from './card';
-
-export function getCards(user) {
-  return fetch(`${config.baseUrl}/cards`, {
-    headers: config.headers,
-  })
-    .then((res) => checkResponse(res))
-    .then((cards) => {
-      cards.forEach((element) => {
-        const userId = user._id;
-        let deleteCard = false;
-        let checkLike = false;
-        if (element.owner._id == userId) {
-          deleteCard = true;
+    checkResponse (res) {
+        if (res.ok) {
+            return res.json();
         }
-        for (let i = 0; i < element.likes.length; i++) {
-          if (element.likes[i]._id == userId) {
-            checkLike = true;
-            break;
-          }
-        }
+        return Promise.reject(res.status);
+    }
 
-        showCard(
-          element.name,
-          element.link,
-          deleteCard,
-          element.likes.length,
-          checkLike,
-          element._id
-        );
-      });
-    });
-}
+    getUser() {
+        return fetch(this.host, {
+            headers: {
+                authorization: this.authorization
+            }
+        })
+        .then((res) => checkResponse (res))
+    }
 
-export function postCard(name, link) {
-  return fetch(`${config.baseUrl}/cards`, {
-    method: 'POST',
-    headers: config.headers,
-    body: JSON.stringify({
-      name: name,
-      link: link,
-    }),
-  })
-    .then((res) => checkResponse(res))
-    .then((result) => {
-      showCard(result.name, result.link, true, 0, false, result._id);
-    });
-}
+    patchProfile(name, about) {
+        return fetch(this.host, {
+            method: 'PATCH',
+            body: JSON.stringify ({
+                name: name,
+                about: about
+            }),
+            headers: {
+                authorization: this.authorization,
+                'Content-Type': 'application/json; charset=UTF-8'
+            }
+        })
+        .then((res) => checkResponse (res))
+        .then((result) => {
+            renderProfile(result.name, result.about);
+        })
+    }
 
-export function deleteCard(evt, id) {
-  return fetch(`${config.baseUrl}/cards/${id}`, {
-    method: 'DELETE',
-    headers: config.headers,
-  })
-    .then((res) => checkResponse(res))
-    .then(() => {
-      evt.target.closest('.card').remove();
-    });
-}
+    patchAvatar(avatar) {
+        return fetch(`${this.host}/users/me/avatar`, {
+            method: 'PATCH',
+            body: JSON.stringify ({
+                avatar: avatar
+            }),
+            headers: {
+                authorization: this.authorization,
+                'Content-Type': 'application/json; charset=UTF-8'
+            }
+        })
+        .then((res) => checkResponse (res))
+        .then((result) => {
+            renderAvatar(result.avatar);
+        })
+    }
 
-export function putLike(id, countElement) {
-  return fetch(`${config.baseUrl}/cards/likes/${id}`, {
-    method: 'PUT',
-    headers: config.headers,
-  })
-    .then((res) => checkResponse(res))
-    .then((result) => {
-      renderLikes(countElement, result.likes.length);
-    });
-}
+    getCards(user) {
+        return fetch(`${this.host}/cards`, {
+            headers: {
+                authorization: this.authorization
+            }
+        })
+        .then((res) => checkResponse (res))
+        .then((cards) => {
+            cards.forEach(element => {
+                const userId = user._id;
+                let deleteCard = false;
+                let checkLike = false;
+                if (element.owner._id == userId) {
+                    deleteCard = true;
+                }
+                for (let i = 0; i < element.likes.length; i++) {
+                    if (element.likes[i]._id == userId) {
+                        checkLike = true;
+                        break
+                    }
+                };
+    
+                showCard(element.name, element.link, deleteCard, element.likes.length, checkLike, element._id);
+            });
+        })
+    }
 
-export function deleteLike(id, countElement) {
-  return fetch(`${config.baseUrl}/cards/likes/${id}`, {
-    method: 'DELETE',
-    headers: config.headers,
-  })
-    .then((res) => checkResponse(res))
-    .then((result) => {
-      renderLikes(countElement, result.likes.length);
-    });
+    postCard(name, link) {
+        return fetch(`${this.host}/cards`, {
+            method: 'POST',
+            body: JSON.stringify ({
+                name: name,
+                link: link
+            }),
+            headers: {
+                authorization: this.authorization,
+                'Content-Type': 'application/json; charset=UTF-8'
+            }
+        })
+        .then((res) => checkResponse (res))
+        .then((result) => {
+            showCard(result.name, result.link, true, 0, false, result._id);
+        })
+    }
+
+    deleteCard(evt, id) {
+        return fetch(`${this.host}/cards/${id}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: this.authorization
+            }
+        })
+        .then((res) => checkResponse (res))
+        .then(() => {
+            evt.target.closest('.card').remove()
+        })
+    }
+
+    putLike(id, countElement) {
+        return fetch(`${this.host}/cards/likes/${id}`, {
+            method: 'PUT',
+            headers: {
+                authorization: this.authorization
+            }
+        })
+        .then((res) => checkResponse (res))
+        .then((result) => {
+            renderLikes(countElement, result.likes.length);
+        })
+    }
+
+    deleteLike(id, countElement) {
+        return fetch(`${this.host}/cards/likes/${id}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: this.authorization
+            }
+        })
+        .then((res) => checkResponse (res))
+        .then((result) => {
+            renderLikes(countElement, result.likes.length);
+        })
+    }
+
 }

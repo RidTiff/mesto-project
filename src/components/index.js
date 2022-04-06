@@ -4,10 +4,11 @@ const userAvatar = document.querySelector('.profile__avatar');
 
 import {getUser, getCards} from './api.js';
 import {renderProfile} from './profile.js'
+import {Api} from './api.js';
 
+export const api = new Api({host:'https://nomoreparties.co/v1/plus-cohort-6/users/me', authorization: 'a5873ca2-eb5b-4cfd-9dad-a8ba3d811b6c'});
 
-
-getUser()
+api.getUser()
     .then((user) => {
         renderProfile(user.name, user.about);
         userAvatar.src = user.avatar;
@@ -41,3 +42,5 @@ import {openAddCardPopup, submitCard} from './card.js'; //Карточки
 import { get } from 'core-js/core/dict';
 document.querySelector('.profile__add-button').addEventListener('click', openAddCardPopup);
 document.forms.card.addEventListener('submit', submitCard);
+
+
