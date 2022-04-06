@@ -4,8 +4,23 @@ const userAvatar = document.querySelector('.profile__avatar');
 
 import { getUser, getCards } from './api.js';
 import { renderProfile } from './profile.js';
+
 import { UserInfo } from './UserInfo.js';
-console.log(UserInfo);
+
+
+import { elements } from './card.js';
+
+import { Section } from './Section.js';
+
+const section = new Section(
+  {
+    renderer(data) {
+      section.addItem(createCard(data));
+    },
+  },
+  elements
+);
+
 
 getUser()
   .then((user) => {
@@ -20,6 +35,7 @@ getUser()
   });
 
 import { enableValidation } from './validate.js'; //Формы
+
 enableValidation({
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -41,3 +57,5 @@ document
   .querySelector('.profile__add-button')
   .addEventListener('click', openAddCardPopup);
 document.forms.card.addEventListener('submit', submitCard);
+
+
