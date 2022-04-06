@@ -1,4 +1,4 @@
-import { renderProfile, renderAvatar, formProfile } from "./profile";
+import { renderProfile, renderAvatar, formProfile } from './profile';
 
 //API Класс
 export class Api {
