@@ -33,6 +33,7 @@ getUser()
   });
 
 import { enableValidation } from './validate.js'; //Формы
+
 enableValidation({
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -54,3 +55,5 @@ document
   .querySelector('.profile__add-button')
   .addEventListener('click', openAddCardPopup);
 document.forms.card.addEventListener('submit', submitCard);
+
+

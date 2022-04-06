@@ -78,14 +78,13 @@ function submitCard(evt) {
   postCard(titleInput.value, imageInput.value)
     .then(() => {
       closePopup(popupAddCard);
+      formAddCard.reset();
     })
     .catch((err) => {
       console.log(`Ошибка: ${err}`);
     });
-  formAddCard.reset();
   formAddCard.elements.submit.classList.add('popup__submit_inactive');
   formAddCard.elements.submit.setAttribute('disabled', true);
-  closePopup(popupAddCard);
 }
 
 // Попап для изображения
