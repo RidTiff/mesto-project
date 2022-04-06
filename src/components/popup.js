@@ -38,7 +38,7 @@ export class Popup {
   }
 }
 
-class PopupWithImage extends Popup {
+export class PopupWithImage extends Popup {
   constructor(selector) {
     super(selector);
   }
@@ -46,5 +46,33 @@ class PopupWithImage extends Popup {
     this._popup.querySelector('.popup__image').setAttribute('src', image);
     this._popup.querySelector('.popup__caption').textContent = caption;
     super.open()
+  }
+}
+
+export class PopupWithForm extends Popup {
+  constructor(selector, form, callback) {
+    super(selector);
+    this._form = form;
+    this._callback = callback;
+  }
+
+  _getInputValues() {
+    this._values = {};
+    this._popup.querySelectorAll('.popup__input').forEach((input) => {
+      const name = input.name;
+      this._values[name] = input.value;
+    }).bind(this);
+    return this._values;
+  }
+
+  _setEventListener(form) {
+    super(this);
+    
+    this._form.addEventListener('submit', form._callback);
+  }
+
+  close() {
+    super();
+    this._form.reset();
   }
 }
