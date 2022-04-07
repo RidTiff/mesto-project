@@ -1,15 +1,16 @@
 // Попапы. Профиль
-import { openPopup, closePopup } from './modal.js';
-import { patchProfile, patchAvatar } from './api.js';
 
 import { renderLoading } from './validate';
 
-
-import {api} from './index'; 
+export const selectors = {
+  profileTitle: '.prof-info__name',
+  profileJob: '.prof-info__description',
+  profileAvatar: '.profile__avatar',
+};
 
 const profile = document.querySelector('.profile');
-const name = profile.querySelector('.prof-info__name');
-const description = profile.querySelector('.prof-info__description');
+export const name = profile.querySelector('.prof-info__name');
+export const description = profile.querySelector('.prof-info__description');
 const editButton = profile.querySelector('.prof-info__edit-button');
 const popupProfile = document.querySelector('.popup_type_profile');
 
@@ -29,18 +30,19 @@ export function renderProfile(userName, userAbout) {
 }
 
 function submitProfile(evt) {
-
-    evt.preventDefault();
-    api.patchProfile(nameInput.value, descriptionInput.value)
-        .then(() => {
-            closePopup(popupProfile);
-        })
-        .catch((err) => {
-            console.log(`Ошибка: ${err}`);
-        })
-        .finally(() => {
-            renderLoading(formProfile, false);s
-        })
+  evt.preventDefault();
+  api
+    .patchProfile(nameInput.value, descriptionInput.value)
+    .then(() => {
+      closePopup(popupProfile);
+    })
+    .catch((err) => {
+      console.log(`Ошибка: ${err}`);
+    })
+    .finally(() => {
+      renderLoading(formProfile, false);
+      s;
+    });
 }
 
 const formAvatar = document.forms.avatar;
@@ -49,7 +51,7 @@ const formAvatarSubmit = formAvatar.querySelector(
 );
 const linkAvatar = formAvatar.elements.link;
 const popupAvatar = document.querySelector('.popup_type_avatar');
-const avatarElement = document.querySelector('.profile__avatar');
+export const avatarElement = document.querySelector('.profile__avatar');
 
 function editAvatar() {
   linkAvatar.value = '';

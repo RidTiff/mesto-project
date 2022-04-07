@@ -1,12 +1,12 @@
 //Отвечает за отрисовку элементов на странице
 export class Section {
-  constructor({ renderer }, cardTemplate) {
-    this._renderer = renderer;
+  constructor({ renderItems }, cardTemplate) {
+    this._renderer = renderItems;
     this._cardTemplate = cardTemplate;
   }
 
   //Функция, которая отвечает за создание и отрисовку данных на странице
-  renderer(items) {
+  renderItems(items) {
     items.forEach((item) => {
       this._renderer(item);
     });
