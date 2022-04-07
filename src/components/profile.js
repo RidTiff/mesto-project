@@ -1,6 +1,6 @@
 // Попапы. Профиль
 import { openPopup, closePopup } from './modal.js';
-import { patchProfile, patchAvatar } from './api.js';
+/*import { patchProfile, patchAvatar } from './api.js';*/
 
 import { renderLoading } from './validate';
 

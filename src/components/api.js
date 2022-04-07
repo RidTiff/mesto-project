@@ -5,6 +5,7 @@ export class Api {
     constructor(options) {
       this.host = options.host;
       this.authorization = options.authorization;
+      this._cardsData=[];
     }
 
     checkResponse (res) {
@@ -58,13 +59,13 @@ export class Api {
         })
     }
 
-    getCards(user) {
+    _getCardsData(user) {
         return fetch(`${this.host}/cards`, {
             headers: {
                 authorization: this.authorization
             }
         })
-        .then((res) => checkResponse (res))
+        .then((res) => this.checkResponse (res))
         .then((cards) => {
             cards.forEach(element => {
                 const userId = user._id;
@@ -79,10 +80,14 @@ export class Api {
                         break
                     }
                 };
-    
-                showCard(element.name, element.link, deleteCard, element.likes.length, checkLike, element._id);
+                this._cardsData.push({title:element.name, image:element.link,author:deleteCard,likeCount:element.likes.length,putMyLike:checkLike,id:element._id})
             });
         })
+    }
+
+    getCards(user){
+        this._getCardsData(user);
+        return this._cardsData;
     }
 
     postCard(name, link) {

@@ -1,12 +1,14 @@
 import '../index.css';
 
-const userAvatar = document.querySelector('.profile__avatar');
+/*const userAvatar = document.querySelector('.profile__avatar');
 
 import {getUser, getCards} from './api.js';
-import {renderProfile} from './profile.js'
+import {renderProfile} from './profile.js'*/
 import {Api} from './api.js';
 
-export const api = new Api({host:'https://nomoreparties.co/v1/plus-cohort-6/users/me', authorization: 'a5873ca2-eb5b-4cfd-9dad-a8ba3d811b6c'});
+export const api = new Api({host:'https://nomoreparties.co/v1/plus-cohort-6', authorization: 'a5873ca2-eb5b-4cfd-9dad-a8ba3d811b6c'});
+
+
 
 api.getUser()
     .then((user) => {
@@ -20,6 +22,7 @@ api.getUser()
     .catch((err) => {
         console.log(`Ошибка: ${err}`);
     })
+
 
 
 import {enableValidation} from './validate.js'; //Формы
