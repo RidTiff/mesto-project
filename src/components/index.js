@@ -1,28 +1,43 @@
 import '../index.css';
 
-const userAvatar = document.querySelector('.profile__avatar');
+import { Api } from './api.js';
 
-import { getUser, getCards } from './api.js';
-import { renderProfile } from './profile.js';
+import { FormValidator } from './FormValidator.js';
+
+import { enableValidation } from './validate.js';
+
+/*import { renderProfile } from './profile.js';
 
 import { UserInfo } from './UserInfo.js';
 
-
 import { elements } from './card.js';
 
-import { Section } from './Section.js';
+import { Section } from './Section.js';*/
 
-const section = new Section(
+const userAvatar = document.querySelector('.profile__avatar');
+
+export const api = new Api({host:'https://nomoreparties.co/v1/plus-cohort-6',authorization: 'a5873ca2-eb5b-4cfd-9dad-a8ba3d811b6c'});
+
+enableValidation({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit',
+  inactiveButtonClass: 'popup__submit_inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active',
+});
+
+/*const section = new Section(
   {
     renderer(data) {
       section.addItem(createCard(data));
     },
   },
   elements
-);
+);*/
 
 
-getUser()
+/*getUser()
   .then((user) => {
     renderProfile(user.name, user.about);
     userAvatar.src = user.avatar;
@@ -56,6 +71,6 @@ import { get } from 'core-js/core/dict';
 document
   .querySelector('.profile__add-button')
   .addEventListener('click', openAddCardPopup);
-document.forms.card.addEventListener('submit', submitCard);
+document.forms.card.addEventListener('submit', submitCard);*/
 
 

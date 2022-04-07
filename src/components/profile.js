@@ -1,11 +1,10 @@
 // Попапы. Профиль
-import { openPopup, closePopup } from './modal.js';
-import { patchProfile, patchAvatar } from './api.js';
+/*import { openPopup, closePopup } from './modal.js';*/
 
 import { renderLoading } from './validate';
 
 
-import {api} from './index'; 
+import {api} from './index.js'; 
 
 const profile = document.querySelector('.profile');
 const name = profile.querySelector('.prof-info__name');
