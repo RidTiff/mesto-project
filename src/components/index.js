@@ -6,9 +6,13 @@ import { FormValidator } from './FormValidator.js';
 
 import { enableValidation } from './validate.js';
 
-/*import { renderProfile } from './profile.js';
+import { renderProfile } from './profile.js';
 
-import { UserInfo } from './UserInfo.js';
+import { Card } from './card.js';
+
+
+
+/*import { UserInfo } from './UserInfo.js';
 
 import { elements } from './card.js';
 
@@ -26,6 +30,25 @@ enableValidation({
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error_active',
 });
+
+let cardsData = [];
+
+api.getUser()
+    .then((user) => {
+        renderProfile(user.name, user.about);
+        userAvatar.src = user.avatar;
+        return api.getCards(user,cardsData)
+            .catch((err) => {
+                console.log(`Ошибка: ${err}`);
+            })
+    })
+    .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+    })
+
+cardsData.forEach((element) => {
+  const card = new Card (element,'.card');
+})
 
 /*const section = new Section(
   {

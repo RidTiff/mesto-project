@@ -19,18 +19,18 @@ export class FormValidator {
     _setEventListeners = () => {
         const inputList = Array.from(this._element.querySelectorAll(this._inputSelector));
         const buttonElement = this._element.querySelector(this._submitButtonSelector);
-        _toggleButtonState(inputList, buttonElement);
+        this._toggleButtonState(inputList, buttonElement);
       
         inputList.forEach((inputElement) => {
           inputElement.addEventListener('input', function () {
-            _checkInputValidity(inputElement);
-            _toggleButtonState(inputList, buttonElement);
+            this._checkInputValidity(inputElement);
+            this._toggleButtonState(inputList, buttonElement);
           });
         });
       };
 
       _toggleButtonState = (inputList, buttonElement) => {
-        if (_hasInvalidInput(inputList)) {
+        if (this._hasInvalidInput(inputList)) {
           buttonElement.classList.add(this._inactiveButtonClass);
           buttonElement.setAttribute('disabled', true);
         } else {

@@ -16,12 +16,12 @@ export class Api {
     }
 
     getUser() {
-        return fetch(this.host, {
+        return fetch(`${this.host}/users/me`, {
             headers: {
                 authorization: this.authorization
             }
         })
-        .then((res) => checkResponse (res))
+        .then((res) => this.checkResponse (res))
     }
 
     patchProfile(name, about) {
@@ -36,7 +36,7 @@ export class Api {
                 'Content-Type': 'application/json; charset=UTF-8'
             }
         })
-        .then((res) => checkResponse (res))
+        .then((res) => this.checkResponse (res))
         .then((result) => {
             renderProfile(result.name, result.about);
         })
@@ -53,13 +53,13 @@ export class Api {
                 'Content-Type': 'application/json; charset=UTF-8'
             }
         })
-        .then((res) => checkResponse (res))
+        .then((res) => this.checkResponse (res))
         .then((result) => {
             renderAvatar(result.avatar);
         })
     }
 
-    _getCardsData(user) {
+    getCards(user,cardsData) {
         return fetch(`${this.host}/cards`, {
             headers: {
                 authorization: this.authorization
@@ -80,14 +80,9 @@ export class Api {
                         break
                     }
                 };
-                this._cardsData.push({title:element.name, image:element.link,author:deleteCard,likeCount:element.likes.length,putMyLike:checkLike,id:element._id})
+                cardsData.push({title:element.name, image:element.link,author:deleteCard,likeCount:element.likes.length,putMyLike:checkLike,id:element._id})
             });
         })
-    }
-
-    getCards(user){
-        this._getCardsData(user);
-        return this._cardsData;
     }
 
     postCard(name, link) {

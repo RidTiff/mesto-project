@@ -1,7 +1,6 @@
 //Попапы. Добавление карточки
 
 import { openPopup, closePopup } from "./modal.js";
-import { postCard, deleteCard, putLike, deleteLike } from "./api.js";
 import {api} from "./index.js";
 
 const popupAddCard = document.querySelector('.popup_type_new-card');
@@ -26,7 +25,7 @@ function openAddCardPopup() {
 
 function submitCard(evt) {
   evt.preventDefault();
-  postCard(titleInput.value, imageInput.value)
+  api.postCard(titleInput.value, imageInput.value)
     .then(() => {
       closePopup(popupAddCard);
       formAddCard.reset();
@@ -64,7 +63,7 @@ export {openAddCardPopup, submitCard, showCard};
 
 //Класс Card
 
-class Card {
+export class Card {
   constructor (data, selector){
     this.title = data.title;
     this.image = data.image;
