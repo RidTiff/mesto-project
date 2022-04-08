@@ -116,30 +116,24 @@ export class Api {
         })
     }
 
-    putLike(id, countElement) {
+    putLike(id) {
         return fetch(`${this.host}/cards/likes/${id}`, {
             method: 'PUT',
             headers: {
                 authorization: this.authorization
             }
         })
-        .then((res) => checkResponse (res))
-        .then((result) => {
-            renderLikes(countElement, result.likes.length);
-        })
+        .then((res) => this.checkResponse (res))
     }
 
-    deleteLike(id, countElement) {
+    deleteLike(id) {
         return fetch(`${this.host}/cards/likes/${id}`, {
             method: 'DELETE',
             headers: {
                 authorization: this.authorization
             }
         })
-        .then((res) => checkResponse (res))
-        .then((result) => {
-            renderLikes(countElement, result.likes.length);
-        })
+        .then((res) => this.checkResponse (res))
     }
 
 }

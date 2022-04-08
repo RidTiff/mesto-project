@@ -36,11 +36,12 @@ enableValidation({
 
 const cardsData = [];
 
-console.log(cardsData);
 
 const cardsSection = new Section({data:cardsData, renderer: (item) => {
-  console.log('123');
-}},'.section')
+  const card = new Card(item,'.card');
+  const cardElement = card.generate();
+  cardsSection.addItem(cardElement);
+}},'.elements')
 
 api.getUser()
     .then((user) => {
@@ -63,15 +64,12 @@ api.getUser()
               cardsData.push({title:element.name, image:element.link,author:deleteCard,likeCount:element.likes.length,putMyLike:checkLike,id:element._id})
           });
           
-          console.log(cardsData.length);
+          cardsSection.renderItems();
       })
     })
     .catch((err) => {
         console.log(`Ошибка: ${err}`);
     })
-
-
-cardsSection.renderItems();
 
 
 
