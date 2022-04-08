@@ -59,14 +59,14 @@ export class Api {
         })
     }
 
-    getCards(user,cardsData) {
+    getCards(user) {
         return fetch(`${this.host}/cards`, {
             headers: {
                 authorization: this.authorization
             }
         })
         .then((res) => this.checkResponse (res))
-        .then((cards) => {
+        /*.then((cards) => {
             cards.forEach(element => {
                 const userId = user._id;
                 let deleteCard = false;
@@ -82,7 +82,7 @@ export class Api {
                 };
                 cardsData.push({title:element.name, image:element.link,author:deleteCard,likeCount:element.likes.length,putMyLike:checkLike,id:element._id})
             });
-        })
+        })*/
     }
 
     postCard(name, link) {

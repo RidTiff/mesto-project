@@ -10,6 +10,9 @@ import { renderProfile } from './profile.js';
 
 import { Card } from './card.js';
 
+import { Section } from './Section.js';
+
+
 
 
 /*import { UserInfo } from './UserInfo.js';
@@ -31,24 +34,46 @@ enableValidation({
   errorClass: 'popup__input-error_active',
 });
 
-let cardsData = [];
+const cardsData = [];
+
+console.log(cardsData);
+
+const cardsSection = new Section({data:cardsData, renderer: (item) => {
+  console.log('123');
+}},'.section')
 
 api.getUser()
     .then((user) => {
         renderProfile(user.name, user.about);
         userAvatar.src = user.avatar;
-        return api.getCards(user,cardsData)
-            .catch((err) => {
-                console.log(`Ошибка: ${err}`);
-            })
+        api.getCards().then((cards) => {
+          cards.forEach(element => {
+              const userId = user._id;
+              let deleteCard = false;
+              let checkLike = false;
+              if (element.owner._id == userId) {
+                  deleteCard = true;
+              }
+              for (let i = 0; i < element.likes.length; i++) {
+                  if (element.likes[i]._id == userId) {
+                      checkLike = true;
+                      break
+                  }
+              };
+              cardsData.push({title:element.name, image:element.link,author:deleteCard,likeCount:element.likes.length,putMyLike:checkLike,id:element._id})
+          });
+          
+          console.log(cardsData.length);
+      })
     })
     .catch((err) => {
         console.log(`Ошибка: ${err}`);
     })
 
-cardsData.forEach((element) => {
-  const card = new Card (element,'.card');
-})
+
+cardsSection.renderItems();
+
+
 
 /*const section = new Section(
   {

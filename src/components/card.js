@@ -1,6 +1,6 @@
 //Попапы. Добавление карточки
 
-import { openPopup, closePopup } from "./modal.js";
+/*import { openPopup, closePopup } from "./modal.js";*/
 import {api} from "./index.js";
 
 const popupAddCard = document.querySelector('.popup_type_new-card');
