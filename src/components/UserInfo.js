@@ -1,31 +1,25 @@
 //Oтвечает за управление информацией о пользователе на странице
 export class UserInfo {
-  constructor({ name, description, avatarElement }) {
-    this._name = name;
-    this._description = description;
-    this._avatarElement = avatarElement;
+  constructor(data) {
+    this._name = document.querySelector(data.nameSlector);
+    this._description = document.querySelector(data.descriptionSlector);
   }
-
   //Метод возвращает объект с данными пользователя
-  getUserInfo() {
-    return {
-      // Возвращает значения из разметки(профиля)
-      name: this._name.textContent,
-      about: this._description.textContent,
-    };
+  getUserInfo(api) {
+    const res = {};
+    api.getUser().then((user) => {
+      res.name = user.name;
+      res.about = user.about;
+    });
+    return res;
   }
-
   //Принимает новые данные пользователя, отправляет их на сервер и добавляет их на страницу
-  setUserInfo = ({ name, about }) => {
+  setUserInfo(name, about, api) {
     //Принимает новые значения
-    this._name = name;
-    this._about = about;
-    this._name.textContent = this._name;
-    this._description.textContent = this._about;
-  };
-
-  setUserAvatar = ({ avatar }) => {
-    this._avatar = avatar;
-    this._avatarElement.src = this._avatar;
-  };
+    api.patchProfile(name, about).then((user) => {
+      console.log(user);
+      this._name.textContent = user.name;
+      this._description.textContent = user.about;
+    });
+  }
 }
