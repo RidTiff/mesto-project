@@ -92,9 +92,6 @@ export class Api {
             }
         })
         .then((res) => this.checkResponse (res))
-        /*.then((result) => {
-            showCard(result.name, result.link, true, 0, false, result._id);
-        })*/
     }
 
     deleteCard(evt, id) {
