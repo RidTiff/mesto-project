@@ -25,7 +25,7 @@ export class Api {
     }
 
     patchProfile(name, about) {
-        return fetch(this.host, {
+        return fetch(`${this.host}/users/me`, {
             method: 'PATCH',
             body: JSON.stringify ({
                 name: name,
@@ -37,9 +37,6 @@ export class Api {
             }
         })
         .then((res) => this.checkResponse (res))
-        .then((result) => {
-            renderProfile(result.name, result.about);
-        })
     }
 
     patchAvatar(avatar) {
@@ -54,9 +51,6 @@ export class Api {
             }
         })
         .then((res) => this.checkResponse (res))
-        .then((result) => {
-            renderAvatar(result.avatar);
-        })
     }
 
     getCards(user) {
@@ -85,8 +79,8 @@ export class Api {
         })*/
     }
 
-    postCard(name, link) {
-        return fetch(`${this.host}/cards`, {
+    postCard(name,link) {
+        return fetch('https://nomoreparties.co/v1/plus-cohort-6/cards', {
             method: 'POST',
             body: JSON.stringify ({
                 name: name,
@@ -97,10 +91,10 @@ export class Api {
                 'Content-Type': 'application/json; charset=UTF-8'
             }
         })
-        .then((res) => checkResponse (res))
-        .then((result) => {
+        .then((res) => this.checkResponse (res))
+        /*.then((result) => {
             showCard(result.name, result.link, true, 0, false, result._id);
-        })
+        })*/
     }
 
     deleteCard(evt, id) {
@@ -110,10 +104,7 @@ export class Api {
                 authorization: this.authorization
             }
         })
-        .then((res) => checkResponse (res))
-        .then(() => {
-            evt.target.closest('.card').remove()
-        })
+        .then((res) => this.checkResponse (res))
     }
 
     putLike(id) {

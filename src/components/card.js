@@ -2,6 +2,7 @@
 
 /*import { openPopup, closePopup } from "./modal.js";*/
 import {api} from "./index.js";
+import { imgPopup } from "./index.js";
 
 const popupAddCard = document.querySelector('.popup_type_new-card');
 
@@ -111,7 +112,6 @@ _setEventListeners(element) {
     if (evt.target.classList.contains('card__like-heart')) {
       console.log('click');
       if (evt.target.classList.contains('card__like-heart_active')){
-        console.log('active');
         api.deleteLike(element.id)
           .then((result) => {
             element.likeElement.classList.remove('card__like-heart_active');
@@ -131,12 +131,14 @@ _setEventListeners(element) {
           });
       }
     } else if (evt.target.classList.contains('card__delete')) {
-      api.deleteCard(evt, this.id)
+      api.deleteCard(evt, element.id).then((result) => {
+        element._element.remove();
+      })
         .catch((err) => {
           console.log(`Ошибка: ${err}`);
         });
     } else if (evt.target.classList.contains('card__image')) {
-      openPopupImage(evt.target.src, evt.target.alt);
+      imgPopup.open(element.image,element.title);
     }
   });
 }

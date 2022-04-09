@@ -2,14 +2,14 @@
 
 export class Popup {
   constructor(selector) {
-    this._popup = document.querySelector(`${selector}`);
+    this._popup = document.querySelector(selector);
+    this._setEventListener(this);
   }
 
   open() {
     this._popup.classList.add('popup_opened');
     document.addEventListener('keyup', (evt) => {
       this._handleEscClose(evt, this);
-      this._setEventListener(this);
     }); 
   }
 
@@ -42,18 +42,20 @@ export class PopupWithImage extends Popup {
   constructor(selector) {
     super(selector);
   }
+
   open(image, caption) {
+    super.open();
+    this._popup.querySelector('.popup__image')
     this._popup.querySelector('.popup__image').setAttribute('src', image);
     this._popup.querySelector('.popup__caption').textContent = caption;
-    super.open()
   }
 }
 
 export class PopupWithForm extends Popup {
-  constructor(selector, form, callback) {
+  constructor(selector, callback) {
     super(selector);
-    this._form = form;
     this._callback = callback;
+    this._form = this._popup.querySelector('.popup__form');
   }
 
   _getInputValues() {
@@ -61,18 +63,21 @@ export class PopupWithForm extends Popup {
     this._popup.querySelectorAll('.popup__input').forEach((input) => {
       const name = input.name;
       this._values[name] = input.value;
-    }).bind(this);
+    });
     return this._values;
   }
 
-  _setEventListener(form) {
-    super(this);
-    
-    this._form.addEventListener('submit', form._callback);
+  _setEventListener() {
+    super._setEventListener(this);
+    this._form = this._popup.querySelector('.popup__form');
+    this._form.addEventListener("submit", (evt) => {
+      this._callback(this._getInputValues());
+      this.close();
+    });
   }
 
   close() {
-    super();
+    super.close();
     this._form.reset();
   }
 }
