@@ -118,7 +118,4 @@ api.getUser()
           cardsSection.renderItems();
       })
     })
-    .catch((err) => {
-        console.log(`Ошибка: ${err}`);
-    })
 

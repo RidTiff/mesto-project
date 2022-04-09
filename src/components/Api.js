@@ -19,6 +19,9 @@ export class Api {
             }
         })
         .then((res) => this.checkResponse (res))
+        .catch((err) => {
+            console.log(`Ошибка: ${err}`);
+        })
     }
 
     patchProfile(name, about) {
@@ -34,6 +37,9 @@ export class Api {
             }
         })
         .then((res) => this.checkResponse (res))
+        .catch((err) => {
+            console.log(`Ошибка: ${err}`);
+        })
     }
 
     patchAvatar(avatar) {
@@ -48,6 +54,9 @@ export class Api {
             }
         })
         .then((res) => this.checkResponse (res))
+        .catch((err) => {
+            console.log(`Ошибка: ${err}`);
+        })
     }
 
     getCards(user) {
@@ -57,6 +66,9 @@ export class Api {
             }
         })
         .then((res) => this.checkResponse (res))
+        .catch((err) => {
+            console.log(`Ошибка: ${err}`);
+        })
     }
 
     postCard(name,link) {
@@ -72,6 +84,9 @@ export class Api {
             }
         })
         .then((res) => this.checkResponse (res))
+        .catch((err) => {
+            console.log(`Ошибка: ${err}`);
+        })
     }
 
     deleteCard(evt, id) {
@@ -82,6 +97,9 @@ export class Api {
             }
         })
         .then((res) => this.checkResponse (res))
+        .catch((err) => {
+            console.log(`Ошибка: ${err}`);
+        })
     }
 
     putLike(id) {
@@ -92,6 +110,9 @@ export class Api {
             }
         })
         .then((res) => this.checkResponse (res))
+        .catch((err) => {
+            console.log(`Ошибка: ${err}`);
+        })
     }
 
     deleteLike(id) {
@@ -102,6 +123,9 @@ export class Api {
             }
         })
         .then((res) => this.checkResponse (res))
+        .catch((err) => {
+            console.log(`Ошибка: ${err}`);
+        })
     }
 
 }

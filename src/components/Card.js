@@ -55,26 +55,17 @@ _setEventListeners(element) {
             element.likeElement.classList.remove('card__like-heart_active');
             element.countElement.textContent = result.likes.length;
           })
-          .catch((err) => {
-            console.log(`Ошибка: ${err}`);
-          });
       } else {
         api.putLike(element.id)
           .then((result) => {
             element.likeElement.classList.add('card__like-heart_active');
             element.countElement.textContent = result.likes.length;
           })
-          .catch((err) => {
-            console.log(`Ошибка: ${err}`);
-          });
       }
     } else if (evt.target.classList.contains('card__delete')) {
       api.deleteCard(evt, element.id).then((result) => {
         element._element.remove();
       })
-        .catch((err) => {
-          console.log(`Ошибка: ${err}`);
-        });
     } else if (evt.target.classList.contains('card__image')) {
       imgPopup.open(element.image,element.title);
     }
