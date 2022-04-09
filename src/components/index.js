@@ -1,6 +1,6 @@
 import '../index.css';
 
-import { Api } from './api.js';
+import { Api } from './Api.js';
 
 import { FormValidator } from './FormValidator.js';
 
@@ -8,15 +8,15 @@ import { enableValidation } from './validate.js';
 
 import { renderProfile } from './profile.js';
 
-import { Card } from './card.js';
+import { Card } from './Card.js';
 
 import { Section } from './Section.js';
 
 import { UserInfo } from './UserInfo.js';
 
-import { PopupWithImage } from './popup.js';
+import { PopupWithForm } from './PopupWithForm.js';
 
-import { PopupWithForm } from './popup.js';
+import { PopupWithImage } from './PopupWithImage.js';
 
 export const api = new Api({host:'https://nomoreparties.co/v1/plus-cohort-6',authorization: 'a5873ca2-eb5b-4cfd-9dad-a8ba3d811b6c'});
 
