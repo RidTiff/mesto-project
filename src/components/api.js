@@ -1,11 +1,8 @@
-import { renderProfile, renderAvatar, formProfile } from './profile';
-
 //API Класс
 export class Api {
     constructor(options) {
       this.host = options.host;
       this.authorization = options.authorization;
-      this._cardsData=[];
     }
 
     checkResponse (res) {
@@ -60,27 +57,10 @@ export class Api {
             }
         })
         .then((res) => this.checkResponse (res))
-        /*.then((cards) => {
-            cards.forEach(element => {
-                const userId = user._id;
-                let deleteCard = false;
-                let checkLike = false;
-                if (element.owner._id == userId) {
-                    deleteCard = true;
-                }
-                for (let i = 0; i < element.likes.length; i++) {
-                    if (element.likes[i]._id == userId) {
-                        checkLike = true;
-                        break
-                    }
-                };
-                cardsData.push({title:element.name, image:element.link,author:deleteCard,likeCount:element.likes.length,putMyLike:checkLike,id:element._id})
-            });
-        })*/
     }
 
     postCard(name,link) {
-        return fetch('https://nomoreparties.co/v1/plus-cohort-6/cards', {
+        return fetch(`${this.host}/cards`, {
             method: 'POST',
             body: JSON.stringify ({
                 name: name,

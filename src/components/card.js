@@ -1,4 +1,4 @@
-import {api} from "./index.js";
+import {api,imgPopup} from "./index.js";
 
 
 //Класс Card
@@ -19,37 +19,36 @@ export class Card {
     return cardElement;
   }
 
-generate() {
-  this._element = this._getElement();
-  this._setEventListeners(this);
+  generate() {
+    this._element = this._getElement();
+    this._setEventListeners(this);
 
-  this.imageElement = this._element.querySelector('.card__image');
-  this.likeElement = this._element.querySelector('.card__like-heart');
-  this.countElement = this._element.querySelector('.card__like-count');
-  this.deleteElement = this._element.querySelector('.card__delete')
+    this.imageElement = this._element.querySelector('.card__image');
+    this.likeElement = this._element.querySelector('.card__like-heart');
+    this.countElement = this._element.querySelector('.card__like-count');
+    this.deleteElement = this._element.querySelector('.card__delete')
 
-  this._element.querySelector('.card__title').textContent = this.title;
-  this.imageElement.setAttribute('src', this.image);
-  this.imageElement.setAttribute('alt', this.title);
+    this._element.querySelector('.card__title').textContent = this.title;
+    this.imageElement.setAttribute('src', this.image);
+    this.imageElement.setAttribute('alt', this.title);
 
-    if(!this.author) {
-      this.deleteElement.remove();
-    }
+      if(!this.author) {
+        this.deleteElement.remove();
+      }
 
-    if(this.putMyLike) {
-      this.likeElement.classList.add('card__like-heart_active');
-    }
+      if(this.putMyLike) {
+        this.likeElement.classList.add('card__like-heart_active');
+      }
 
-    this.countElement.textContent = this.likeCount;
+      this.countElement.textContent = this.likeCount;
 
-  return this._element;
-}
+    return this._element;
+  }
 
 
 _setEventListeners(element) {
   this._element.addEventListener('click', function (evt) {
     if (evt.target.classList.contains('card__like-heart')) {
-      console.log('click');
       if (evt.target.classList.contains('card__like-heart_active')){
         api.deleteLike(element.id)
           .then((result) => {

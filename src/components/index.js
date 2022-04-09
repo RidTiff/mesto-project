@@ -2,11 +2,8 @@ import '../index.css';
 
 import { Api } from './Api.js';
 
-import { FormValidator } from './FormValidator.js';
-
 import { enableValidation } from './validate.js';
 
-import { renderProfile } from './profile.js';
 
 import { Card } from './Card.js';
 
@@ -42,8 +39,8 @@ export const addCardPopup = new PopupWithForm('.popup_type_new-card',(data) => {
     const card = new Card(cardData,'.card');
     const cardElement = card.generate();
     cardsSection.addItem(cardElement);
-  }).then((result) => {
     addCardPopup.close();
+  }).finally((result) => {
     addCardPopup.toggleSaveBtnCaption('Создать');
   })
 });
@@ -51,21 +48,19 @@ export const addCardPopup = new PopupWithForm('.popup_type_new-card',(data) => {
 const editProfileForm = new PopupWithForm('.popup_type_profile',(data) => {
   editProfileForm.toggleSaveBtnCaption('Сохранение...');
   userInfo.setUserInfo(data.name,data.description,api).then((res) => {
-    editProfileForm.toggleSaveBtnCaption('Сохранить');
     editProfileForm.close();
-  });
+  }).finally(() => {editProfileForm.toggleSaveBtnCaption('Сохранить');});
 })
 
 const editAvatarForm = new PopupWithForm('.popup_type_avatar',(data) => {
   editAvatarForm.toggleSaveBtnCaption('Сохранение...');
   api.patchAvatar(data.link).then((result) => {
     userAvatar.setAttribute('src',result.avatar);
-    editAvatarForm.toggleSaveBtnCaption('Сохранить');
     editAvatarForm.close();
-  })
+  }).finally(()=>{editAvatarForm.toggleSaveBtnCaption('Сохранить');})
 })
 
-const userInfo = new UserInfo({nameSlector:'.prof-info__name',descriptionSlector:'.prof-info__description'});
+const userInfo = new UserInfo({nameSelector:'.prof-info__name',descriptionSelector:'.prof-info__description'});
 
 const addCardButton = document.querySelector('.profile__add-button');
 const editProfileButton = document.querySelector('.prof-info__edit-button');
@@ -102,7 +97,7 @@ enableValidation({
 
 api.getUser()
     .then((user) => {
-        renderProfile(user.name, user.about);
+        userInfo.getUserInfo(api);
         userAvatar.src = user.avatar;
         api.getCards().then((cards) => {
           cards.forEach(element => {
@@ -120,7 +115,6 @@ api.getUser()
               };
               cardsData.push({title:element.name, image:element.link,author:deleteCard,likeCount:element.likes.length,putMyLike:checkLike,id:element._id})
           });
-          
           cardsSection.renderItems();
       })
     })

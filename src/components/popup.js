@@ -3,10 +3,10 @@
 export class Popup {
   constructor(selector) {
     this._popup = document.querySelector(selector);
-    this._setEventListener(this);
   }
 
   open() {
+    this._setEventListener(this);
     this._popup.classList.add('popup_opened');
     document.addEventListener('keyup', (evt) => {
       this._handleEscClose(evt, this);
@@ -17,7 +17,6 @@ export class Popup {
     this._popup.classList.remove('popup_opened');
     document.removeEventListener('keyup', (evt) => {
       this._handleEscClose(evt, this);
-      this._setEventListener(this);
     }); 
   }
 

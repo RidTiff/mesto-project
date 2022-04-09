@@ -1,8 +1,8 @@
 //Oтвечает за управление информацией о пользователе на странице
 export class UserInfo {
   constructor(data) {
-    this._name = document.querySelector(data.nameSlector);
-    this._description = document.querySelector(data.descriptionSlector);
+    this._name = document.querySelector(data.nameSelector);
+    this._description = document.querySelector(data.descriptionSelector);
   }
 
   //Метод возвращает объект с данными пользователя
