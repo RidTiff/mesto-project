@@ -35,21 +35,33 @@ const cardsSection = new Section({data:cardsData, renderer: (item) => {
 
 
 export const addCardPopup = new PopupWithForm('.popup_type_new-card',(data) => {
+  addCardPopup.toggleSaveBtnCaption('Сохранение...');
+
   api.postCard(data.title,data.link).then((result) => {
     const cardData = {title:result.name,image:result.link,author:1,putMyLike:false,likeCount:0,id:result._id};
     const card = new Card(cardData,'.card');
     const cardElement = card.generate();
     cardsSection.addItem(cardElement);
+  }).then((result) => {
+    addCardPopup.close();
+    addCardPopup.toggleSaveBtnCaption('Создать');
   })
 });
 
 const editProfileForm = new PopupWithForm('.popup_type_profile',(data) => {
-  userInfo.setUserInfo(data.name,data.description,api);
+  editProfileForm.toggleSaveBtnCaption('Сохранение...');
+  userInfo.setUserInfo(data.name,data.description,api).then((res) => {
+    editProfileForm.toggleSaveBtnCaption('Сохранить');
+    editProfileForm.close();
+  });
 })
 
 const editAvatarForm = new PopupWithForm('.popup_type_avatar',(data) => {
+  editAvatarForm.toggleSaveBtnCaption('Сохранение...');
   api.patchAvatar(data.link).then((result) => {
     userAvatar.setAttribute('src',result.avatar);
+    editAvatarForm.toggleSaveBtnCaption('Сохранить');
+    editAvatarForm.close();
   })
 })
 

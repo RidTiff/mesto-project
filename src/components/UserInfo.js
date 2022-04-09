@@ -17,10 +17,9 @@ export class UserInfo {
   //Принимает новые данные пользователя, отправляет их на сервер и добавляет их на страницу
   setUserInfo (name, about ,api) {
     //Принимает новые значения
-    api.patchProfile(name, about).then((user)=>{
+    return api.patchProfile(name, about).then((user)=>{
       this._name.textContent = user.name;
       this._description.textContent = user.about;
     })
-
   };
 }

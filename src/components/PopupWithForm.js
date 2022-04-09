@@ -5,6 +5,11 @@ export class PopupWithForm extends Popup {
     super(selector);
     this._callback = callback;
     this._form = this._popup.querySelector('.popup__form');
+    this._submitBtn = this._popup.querySelector('.popup__submit');
+  }
+
+  toggleSaveBtnCaption(caption){
+    this._submitBtn.textContent = caption;
   }
 
   _getInputValues() {
@@ -21,7 +26,6 @@ export class PopupWithForm extends Popup {
     this._form = this._popup.querySelector('.popup__form');
     this._form.addEventListener("submit", (evt) => {
       this._callback(this._getInputValues());
-      this.close();
     });
   }
 
