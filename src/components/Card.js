@@ -40,7 +40,7 @@ export class Card {
     if(!this._author) {
       this._deleteElement.remove();
     }
-    if(this.putMyLike) {
+    if(this._putMyLike) {
       this._likeElement.classList.add('card__like-heart_active');
     }
     this._countElement.textContent = this._likeCount;
