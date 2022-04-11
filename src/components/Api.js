@@ -2,7 +2,7 @@
 export class Api {
     constructor(options) {
       this.host = options.host;
-      this.authorization = options.authorization;
+      this._headers = options.headers
     }
 
     checkResponse (res) {
@@ -14,14 +14,9 @@ export class Api {
 
     getUser() {
         return fetch(`${this.host}/users/me`, {
-            headers: {
-                authorization: this.authorization
-            }
+            headers: this._headers
         })
         .then((res) => this.checkResponse (res))
-        .catch((err) => {
-            console.log(`Ошибка: ${err}`);
-        })
     }
 
     patchProfile(name, about) {
@@ -31,15 +26,9 @@ export class Api {
                 name: name,
                 about: about
             }),
-            headers: {
-                authorization: this.authorization,
-                'Content-Type': 'application/json; charset=UTF-8'
-            }
+            headers: this._headers
         })
         .then((res) => this.checkResponse (res))
-        .catch((err) => {
-            console.log(`Ошибка: ${err}`);
-        })
     }
 
     patchAvatar(avatar) {
@@ -48,27 +37,16 @@ export class Api {
             body: JSON.stringify ({
                 avatar: avatar
             }),
-            headers: {
-                authorization: this.authorization,
-                'Content-Type': 'application/json; charset=UTF-8'
-            }
+            headers: this._headers
         })
         .then((res) => this.checkResponse (res))
-        .catch((err) => {
-            console.log(`Ошибка: ${err}`);
-        })
     }
 
     getCards(user) {
         return fetch(`${this.host}/cards`, {
-            headers: {
-                authorization: this.authorization
-            }
+            headers: this._headers
         })
         .then((res) => this.checkResponse (res))
-        .catch((err) => {
-            console.log(`Ошибка: ${err}`);
-        })
     }
 
     postCard(name,link) {
@@ -78,54 +56,33 @@ export class Api {
                 name: name,
                 link: link
             }),
-            headers: {
-                authorization: this.authorization,
-                'Content-Type': 'application/json; charset=UTF-8'
-            }
+            headers: this._headers
         })
         .then((res) => this.checkResponse (res))
-        .catch((err) => {
-            console.log(`Ошибка: ${err}`);
-        })
     }
 
-    deleteCard(evt, id) {
+    deleteCard(id) {
         return fetch(`${this.host}/cards/${id}`, {
             method: 'DELETE',
-            headers: {
-                authorization: this.authorization
-            }
+            headers: this._headers
         })
         .then((res) => this.checkResponse (res))
-        .catch((err) => {
-            console.log(`Ошибка: ${err}`);
-        })
     }
 
     putLike(id) {
         return fetch(`${this.host}/cards/likes/${id}`, {
             method: 'PUT',
-            headers: {
-                authorization: this.authorization
-            }
+            headers: this._headers
         })
         .then((res) => this.checkResponse (res))
-        .catch((err) => {
-            console.log(`Ошибка: ${err}`);
-        })
     }
 
     deleteLike(id) {
         return fetch(`${this.host}/cards/likes/${id}`, {
             method: 'DELETE',
-            headers: {
-                authorization: this.authorization
-            }
+            headers: this._headers
         })
         .then((res) => this.checkResponse (res))
-        .catch((err) => {
-            console.log(`Ошибка: ${err}`);
-        })
     }
 
 }

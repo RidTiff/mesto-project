@@ -1,75 +1,88 @@
-import {api,imgPopup} from "./index.js";
-
-
 //Класс Card
 
 export class Card {
   constructor (data, selector){
     this.title = data.title;
     this.image = data.image;
-    this.author = data.author;
-    this.putMyLike = data.putMyLike;
-    this.likeCount = data.likeCount;
-    this.selector = selector;
-    this.id = data.id;
+    this._author = data.author;
+
+    this._putMyLike = data.putMyLike;
+    this._likeCount = data.likeCount;
+
+    this._selector = selector;
+
+    this._id = data.id;
+    this._putLike = data.putLike;
+    this._deleteLike = data.deleteLike;
+    this._openImgPopup = data.openImgPopup;
+    this._deleteCard = data.deleteCard;
+
   }
 
   _getElement() {
-    const cardElement = document.querySelector('#card').content.querySelector(this.selector).cloneNode(true);
+    const cardElement = document.querySelector(this._selector).content.querySelector('.card').cloneNode(true);
     return cardElement;
   }
 
   generate() {
     this._element = this._getElement();
-    this._setEventListeners(this);
 
-    this.imageElement = this._element.querySelector('.card__image');
-    this.likeElement = this._element.querySelector('.card__like-heart');
-    this.countElement = this._element.querySelector('.card__like-count');
-    this.deleteElement = this._element.querySelector('.card__delete')
+    this._imageElement = this._element.querySelector('.card__image');
+    this._likeElement = this._element.querySelector('.card__like-heart');
+
+    this._countElement = this._element.querySelector('.card__like-count');
+    this._deleteElement = this._element.querySelector('.card__delete')
 
     this._element.querySelector('.card__title').textContent = this.title;
-    this.imageElement.setAttribute('src', this.image);
-    this.imageElement.setAttribute('alt', this.title);
+    this._imageElement.setAttribute('src', this.image);
+    this._imageElement.setAttribute('alt', this.title);
 
-      if(!this.author) {
-        this.deleteElement.remove();
-      }
-
-      if(this.putMyLike) {
-        this.likeElement.classList.add('card__like-heart_active');
-      }
-
-      this.countElement.textContent = this.likeCount;
+    if(!this._author) {
+      this._deleteElement.remove();
+    }
+    if(this.putMyLike) {
+      this._likeElement.classList.add('card__like-heart_active');
+    }
+    this._countElement.textContent = this._likeCount;
+    
+    this._setEventListeners();
 
     return this._element;
   }
 
+  getId() {
+    return this._id;
+  }
 
-_setEventListeners(element) {
-  this._element.addEventListener('click', function (evt) {
-    if (evt.target.classList.contains('card__like-heart')) {
-      if (evt.target.classList.contains('card__like-heart_active')){
-        api.deleteLike(element.id)
-          .then((result) => {
-            element.likeElement.classList.remove('card__like-heart_active');
-            element.countElement.textContent = result.likes.length;
-          })
+  putLike(res) {
+    this._likeElement.classList.add('card__like-heart_active');
+    this._countElement.textContent = res.likes.length;
+  }
+
+  deleteLike(res) {
+    this._likeElement.classList.remove('card__like-heart_active');
+    this._countElement.textContent = res.likes.length;
+  }
+
+  deleteCard() {
+    this._element.remove();
+  }
+
+  _setEventListeners() {
+    this._likeElement.addEventListener('click', () => {
+      if(this._likeElement.classList.contains('card__like-heart_active')) {
+        this._deleteLike(this);
       } else {
-        api.putLike(element.id)
-          .then((result) => {
-            element.likeElement.classList.add('card__like-heart_active');
-            element.countElement.textContent = result.likes.length;
-          })
+        this._putLike(this);
       }
-    } else if (evt.target.classList.contains('card__delete')) {
-      api.deleteCard(evt, element.id).then((result) => {
-        element._element.remove();
-      })
-    } else if (evt.target.classList.contains('card__image')) {
-      imgPopup.open(element.image,element.title);
-    }
-  });
-}
+    })
 
+    this._deleteElement.addEventListener('click', () => {
+      this._deleteCard(this);
+    })
+
+    this._imageElement.addEventListener('click', () => {
+      this._openImgPopup(this);
+    })
+  }
 }
