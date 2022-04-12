@@ -4,8 +4,7 @@ import '../index.css';
 
 import { Api } from './Api.js';
 
-import { enableValidation } from './validate.js';
-
+import {FormValidator} from "./FormValidator.js";
 
 import { Card } from './Card.js';
 
@@ -17,6 +16,24 @@ import { PopupWithForm } from './PopupWithForm.js';
 
 import { PopupWithImage } from './PopupWithImage.js';
 
+const settings = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit',
+  inactiveButtonClass: 'popup__submit_inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active',
+}
+
+const formCardValidator = new FormValidator(settings, document.forms.card);
+formCardValidator.enableValidation();
+
+const formProfileValidator = new FormValidator(settings, document.forms.profile);
+formProfileValidator.enableValidation();
+
+const formAvatarValidator = new FormValidator(settings, document.forms.avatar);
+formAvatarValidator.enableValidation();
+
 
 //Объявление констант и навешивание коллбэков
 
@@ -25,10 +42,12 @@ const editProfileButton = document.querySelector('.prof-info__edit-button');
 const editAvatarButton = document.querySelector('.profile__avatar-button');
 
 editAvatarButton.addEventListener('click', () => {
+  formAvatarValidator.resetValidation();
   editAvatarForm.open();
 })
 
 addCardButton.addEventListener('click',() => {
+  formCardValidator.resetValidation();
   addCardPopup.open();
 })
 
@@ -40,6 +59,7 @@ editProfileButton.addEventListener('click', () => {
   const data = userInfo.getUserInfo();
   nameInput.value = data.name;
   aboutInput.value = data.about;
+  formProfileValidator.resetValidation();
   editProfileForm.open();
 })
 
@@ -138,7 +158,6 @@ const editProfileForm = new PopupWithForm('.popup_type_profile',(data) => {
 
   api.patchProfile(data.name,data.description)
     .then((res) => {
-      console.log(res);
       userInfo.setUserInfo(res);
       editProfileForm.close();
     })
@@ -171,14 +190,8 @@ const userInfo = new UserInfo({
   avatarSelector: '.profile__avatar'
 });
 
-enableValidation({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit',
-  inactiveButtonClass: 'popup__submit_inactive',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_active',
-});
+
+
 
 const cardsData = [];
 
@@ -197,7 +210,6 @@ api.getUser()
           for (let i = 0; i < element.likes.length; i++) {
               if (element.likes[i]._id == userId) {
                   checkLike = true;
-                  console.log('check');
                   break
               }
           };

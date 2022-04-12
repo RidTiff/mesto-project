@@ -16,8 +16,8 @@
         <button type="button" class="profile__avatar-button"></button>
       </div>
       <div class="prof-info">
-        <h1 class="prof-info__name">Жак-Ив Кусто</h1>
-        <p class="prof-info__description">Исследователь океана</p>
+        <h1 class="prof-info__name"></h1>
+        <p class="prof-info__description"></p>
         <button class="prof-info__edit-button" type="button"></button>
       </div>
       <button class="profile__add-button" type="button"></button>
@@ -31,10 +31,10 @@
         <h2 class="popup__title">Редактировать профиль</h2>
         <form action="#" novalidate class="popup__form popup__form_type_profile" method="post" name="profile">
           <fieldset class="popup__input-container">
-            <input type="text" value="Жак-Ив Кусто" id="name" name="name" required 
+            <input type="text" value="" id="name" name="name" required 
             class="popup__input popup__input_value_name" minlength="2" maxlength="40">
             <span class="popup__input-error name-error">Вы пропустили это поле.</span>
-            <input type="text" value="Исследователь океана" required id="description"
+            <input type="text" value="" required id="description"
             name="description" class="popup__input popup__input_value_description" minlength="2" maxlength="200">
             <span class="popup__input-error description-error">Вы пропустили это поле.</span>
           </fieldset>
@@ -69,7 +69,7 @@
             class="popup__input popup__input_value_image-link" name="link" >
             <span class="popup__input-error link-error">Вы пропустили это поле.</span>
           </fieldset>
-          <button disabled name="submit" class="popup__submit popup__submit_place_card" type="submit">Создать</button>
+          <button name="submit" class="popup__submit popup__submit_place_card" type="submit">Создать</button>
         </form>
       </div>
     </div>
