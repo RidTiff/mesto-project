@@ -40,7 +40,10 @@
     &__avatar {
         @include obnull;
         display: block;
-        height: 120px;
+        height: min-content;
+        width: min-content;
+        min-height: 120px;
+        min-width: 120px;
     }
 
     &__avatar-container {
